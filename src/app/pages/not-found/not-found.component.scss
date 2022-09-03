@@ -1,0 +1,26 @@
+@import 'src/app/styles/colors';
+@import 'src/app/styles/font';
+
+.not-found-page {
+    height: 100vh;
+    &__content {
+        &-left {
+        }
+        &-right {
+        }
+    }
+    &__card {
+        box-shadow: none;
+        align-items: center;
+        &-content {
+            &-title {
+                font-family: 700;
+            }
+            &-sub-title {
+            }
+            &-link {
+                cursor: pointer;
+            }
+        }
+    }
+}

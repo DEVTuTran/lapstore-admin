@@ -1,0 +1,40 @@
+.brand-content {
+    display: block;
+    &__wrapper {
+        box-shadow: none;
+        &-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .title {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 25px;
+                margin-bottom: 24px;
+            }
+        }
+    }
+
+    &__table {
+        width: 100%;
+        border: 1px solid #e1e4e6;
+        border-bottom: 0;
+        .status {
+            border-radius: 16px;
+            margin-left: 20px;
+            padding: 2px 8px;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 18px;
+            text-align: center;
+        }
+        .active {
+            background: #ecfdf3;
+            color: #12b76a;
+        }
+        .unactive {
+            background: #fef3f2;
+            color: #f04438;
+        }
+    }
+}

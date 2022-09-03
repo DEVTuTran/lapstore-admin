@@ -1,0 +1,109 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+<mat-toolbar class="header-title" role="heading">
+  <div class="toolbar-link">
+    <img
+      class="icon-image link-item"
+      [src]="homeIcon"
+      alt="home"
+      routerLink="/dashboard"
+    />
+    <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
+    <span class="link-item" routerLink="/inventory">Inventory</span>
+    <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
+    <span>Lists</span>
+  </div>
+</mat-toolbar>
+<mat-card-content class="inventory-content">
+  <div class="inventory-content__action">
+    <input
+      matInput
+      placeholder="Search"
+      type="text"
+      class="search-input"
+      (keyup)="onSearch($event)"
+    />
+  </div>
+  <table mat-table [dataSource]="listInventory" class="product-content__table">
+    <ng-container matColumnDef="productId">
+      <th mat-header-cell *matHeaderCellDef>Inventory ID</th>
+      <td mat-cell *matCellDef="let element">
+        <span
+          class="element-name"
+          [routerLink]="['/inventory/detail/' + element._id]"
+          >{{ element._id }}</span
+        >
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="productName">
+      <th mat-header-cell *matHeaderCellDef>Product Name</th>
+      <td mat-cell *matCellDef="let element">
+        <span
+          class="element-name"
+          [routerLink]="['/products/detail/' + element.productId]"
+          >{{ element.productName }}</span
+        >
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef>Quantity</th>
+      <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="userNumber">
+      <th mat-header-cell *matHeaderCellDef>User Number</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.reservations.length }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createAt">
+      <th mat-header-cell *matHeaderCellDef>Create At</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.createdAt | date: "dd MMM yyyy" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="list-actions">
+          <button
+            mat-icon-button
+            class="edit-action"
+            type="button"
+            (click)="
+              openDialogUpdate(
+                element._id,
+                element.productName,
+                element.quantity
+              )
+            "
+          >
+            <img [src]="editIcon" />
+          </button>
+          <button
+            mat-icon-button
+            class="delete-action"
+            type="button"
+            (click)="openDialogDelete(element._id, element.productName)"
+          >
+            <img [src]="deleteIcon" />
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableColums"></tr>
+    <tr mat-row *matRowDef="let row; columns: tableColums"></tr>
+  </table>
+  <mat-paginator
+    [length]="length"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page"
+    (page)="pageEvent = getInventoryList($event, filter)"
+  >
+  </mat-paginator>
+</mat-card-content>

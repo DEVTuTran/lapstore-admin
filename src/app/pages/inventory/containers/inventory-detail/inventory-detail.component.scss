@@ -1,0 +1,55 @@
+.header-title {
+    background-color: unset;
+    height: 60px;
+    .toolbar-link {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        .icon-image {
+            height: 16px;
+        }
+        .slash-icon {
+            margin: 0 5px;
+        }
+        .link-item {
+            cursor: pointer;
+        }
+    }
+
+    span {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 25px;
+        color: #a2acb5;
+    }
+}
+.inventory-infor {
+    margin: 0 16px;
+    padding: 0 8px;
+
+    &__content {
+        box-shadow: none;
+        margin: 16px;
+        padding: 30px;
+        &-head {
+            .field-value {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 25px;
+                color: #000000;
+                .value {
+                    font-weight: 500;
+                }
+            }
+        }
+        &-table {
+            .table-data {
+                width: 100%;
+                border-spacing: 2px;
+                border: 1px solid #e1e4e6;
+                border-bottom: 0;
+                border-radius: 8px;
+            }
+        }
+    }
+}

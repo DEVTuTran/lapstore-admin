@@ -1,0 +1,172 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+<mat-toolbar class="header-title" role="heading">
+  <div class="toolbar-link">
+    <img
+      class="icon-image link-item"
+      [src]="homeIcon"
+      alt="home"
+      routerLink="/dashboard"
+    />
+    <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
+    <span class="link-item" routerLink="/customers">Customers</span>
+    <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
+    <span>{{ userInfor && userInfor.userName }}</span>
+  </div>
+</mat-toolbar>
+<mat-card-content class="setting-content">
+  <mat-card class="setting-content__wrapper">
+    <mat-card-title class="setting-content__wrapper-title">
+      <p class="title">User Detail</p>
+    </mat-card-title>
+    <div class="setting-content__wrapper-content">
+      <div class="upload-image">
+        <input type="file" class="select-file" (change)="uploadImage($event)" />
+        <img
+          mat-card-avatar
+          class="avatar-image"
+          [src]="userInfor && userInfor.photo ? userInfor.photo : photo"
+          alt="avatar"
+        />
+      </div>
+      <form
+        [formGroup]="formUserInfor"
+        *ngIf="formUserInfor"
+        class="form-content"
+      >
+        <div class="row-item">
+          <div class="row-item__field">
+            <p class="label">Username</p>
+            <mat-form-field appearance="outline" class="field-input">
+              <input
+                matInput
+                placeholder="Username"
+                type="text"
+                formControlName="userName"
+              />
+            </mat-form-field>
+          </div>
+          <div class="row-item__field">
+            <p class="label">Email</p>
+            <mat-form-field appearance="outline" class="field-input">
+              <input
+                matInput
+                placeholder="Email"
+                type="email"
+                formControlName="email"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row-item">
+          <div class="row-item__field">
+            <p class="label">Date Of Birth</p>
+            <mat-form-field appearance="outline" class="field-input">
+              <input
+                matInput
+                [matDatepicker]="picker"
+                placeholder="Date Of Birth"
+                formControlName="dateOfBirth"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="row-item__field">
+            <p class="label">Phone Number</p>
+            <mat-form-field
+              appearance="outline"
+              class="field-input select-field"
+            >
+              <input
+                matInput
+                placeholder="Phone number"
+                type="text"
+                formControlName="phoneNumber"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row-item">
+          <div class="row-item__field-address">
+            <p class="label">Location</p>
+            <div class="field-input">
+              <mat-form-field appearance="outline" class="row-item__field-sub">
+                <mat-select
+                  placeholder="Province"
+                  formControlName="province"
+                  (selectionChange)="selectProvince($event)"
+                >
+                  <mat-option
+                    *ngFor="let province of provinces"
+                    [value]="province.name"
+                  >
+                    {{ province.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="row-item__field-sub">
+                <mat-select
+                  placeholder="District"
+                  formControlName="district"
+                  (selectionChange)="selectDistrict($event)"
+                >
+                  <mat-option
+                    *ngFor="let district of districts"
+                    [value]="district.name"
+                  >
+                    {{ district.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="row-item__field-sub">
+                <mat-select
+                  placeholder="Wards"
+                  formControlName="wards"
+                  (selectionChange)="selectWard($event)"
+                >
+                  <mat-option *ngFor="let ward of wards" [value]="ward.name">
+                    {{ ward.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="row-item">
+          <div class="row-item__field-full">
+            <p class="label">Address</p>
+            <mat-form-field appearance="outline" class="field-input">
+              <input
+                matInput
+                placeholder="Address"
+                type="text"
+                formControlName="address"
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-card>
+  <div class="action-form">
+    <button
+      mat-stroked-button
+      color="primary"
+      class="btn-action btn-save"
+      (click)="onEdit()"
+    >
+      Save
+    </button>
+    <button
+      mat-stroked-button
+      color="warn"
+      type="reset"
+      class="btn-action btn-cancel"
+    >
+      Cancel
+    </button>
+  </div>
+</mat-card-content>

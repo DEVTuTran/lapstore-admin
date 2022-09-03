@@ -1,0 +1,68 @@
+<div class="edit-brand-modal">
+  <div class="edit-brand-modal__header">
+    <h4 class="title">{{ data.title }}</h4>
+  </div>
+
+  <div
+    mat-dialog-content
+    class="edit-brand-modal__content"
+    *ngIf="data.type == 'add'; else edit"
+  >
+    {{ data.message }}?
+  </div>
+
+  <ng-template #edit>
+    <div mat-dialog-content class="edit-brand-modal__content">
+      {{ data.message }}
+      <span class="name">{{ data.name }} </span>?
+    </div>
+  </ng-template>
+
+  <form [formGroup]="brandForm" class="edit-brand-modal__form">
+    <div class="upload-image">
+      <input type="file" class="select-file" (change)="uploadImage($event)" />
+      <img
+        mat-card-avatar
+        class="product-thumbnail"
+        [src]="data.thumbnail || photo"
+        alt="thumbnail"
+      />
+    </div>
+    <mat-form-field appearance="outline" class="field-quantity">
+      <input
+        matInput
+        placeholder="Enter brand name"
+        type="text"
+        formControlName="name"
+      />
+      <mat-error *ngIf="!brandForm.get('quantity')?.errors?.['required']">
+        Brand name is more than 1 characters!
+      </mat-error>
+      <mat-error
+        *ngIf="brandForm.get('quantity')?.invalid && (brandForm.get('quantity')?.dirty || brandForm.get('quantity')?.touched) && brandForm.get('quantity')?.errors?.['required']"
+      >
+        Brand name is required
+      </mat-error>
+    </mat-form-field>
+  </form>
+  <div mat-dialog-actions class="edit-brand-modal__action">
+    <button
+      mat-button
+      (click)="onNoClick()"
+      class="btn-action btn-cancel"
+      type="button"
+    >
+      Cancel
+    </button>
+    <button
+      mat-button
+      mat-dialog-close
+      cdkFocusInitial
+      (click)="onClick()"
+      type="button"
+      class="btn-action btn-edit"
+    >
+      {{ data.type == "add" ? "Add" : "Edit" }}
+    </button>
+  </div>
+</div>

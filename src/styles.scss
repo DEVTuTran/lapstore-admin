@@ -1,0 +1,61 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+
+@import 'src/app/styles/colors';
+@import 'src/app/styles/variables';
+@import 'src/app/styles/font';
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.mat-form-field-infix {
+    padding: 0.5em 0 !important;
+    border-top: 0.5em solid rgba(0, 0, 0, 0);
+}
+
+.create-product-notsuccess {
+    background: red !important;
+}
+::-webkit-scrollbar {
+    width: 6px;
+    height: 3px;
+}
+::-webkit-scrollbar-button {
+    display: none;
+}
+::-webkit-scrollbar-track {
+    background-color: $scrollbar-track-color;
+}
+::-webkit-scrollbar-track-piece {
+    background-color: $scrollbar-track-piece-color;
+}
+::-webkit-scrollbar-thumb {
+    height: 50px;
+    background-color: $light-grey;
+    border-radius: 36px;
+}
+::-webkit-scrollbar-corner {
+    background-color: $scrollbar-corner-color;
+}
+::-webkit-resizer {
+    background-color: $dark-grey;
+}
+
+.snackbar-notification__success {
+    position: absolute !important;
+    top: 45px;
+    right: 0;
+    background: green;
+}
+.snackbar-notification__not-success {
+    position: absolute !important;
+    top: 45px;
+    right: 0;
+    background: red;
+}

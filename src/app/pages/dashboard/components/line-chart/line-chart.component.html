@@ -1,0 +1,17 @@
+<div class="line-chart">
+  <h2 class="title">Sale chart</h2>
+
+  <canvas
+    #myCanvas
+    baseChart
+    [chartType]="'line'"
+    [legend]="true"
+    [options]="chartOptions"
+    [datasets]="lineChartData"
+    [labels]="lineChartLabels"
+    [colors]="lineChartColors"
+    [legend]="lineChartLegend"
+    [plugins]="lineChartPlugins"
+  >
+  </canvas>
+</div>

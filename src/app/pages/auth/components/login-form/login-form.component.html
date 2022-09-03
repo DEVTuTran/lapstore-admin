@@ -1,0 +1,55 @@
+<div class="login-form">
+  <img src="../../../../../assets/imgs/logo.png" class="logo" alt="logo" />
+  <form class="form" [formGroup]="form" (ngSubmit)="login()">
+    <h1 class="title">Sign in</h1>
+    <p class="sub-title">Welcome to lapstore</p>
+    <mat-form-field appearance="outline" class="form__input">
+      <mat-icon matPrefix>person</mat-icon>
+      <input
+        matInput
+        placeholder="User account"
+        type="email"
+        formControlName="email"
+      />
+      <mat-error *ngIf="!form.get('email')?.errors?.['required']">
+        Email is invalid
+      </mat-error>
+      <mat-error
+        *ngIf="form.get('email')?.invalid && (form.get('email')?.dirty || form.get('email')?.touched) && form.get('email')?.errors?.['required']"
+      >
+        Email is required
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="form__input">
+      <mat-icon matPrefix>lock</mat-icon>
+      <input
+        matInput
+        placeholder="Password"
+        [type]="hide ? 'password' : 'text'"
+        formControlName="password"
+      />
+      <button type="button" mat-icon-button matSuffix (click)="hide = !hide">
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+      <mat-error *ngIf="!form.get('password')?.errors?.['required']">
+        Password is more than 6 characters
+      </mat-error>
+      <mat-error
+        *ngIf="form.get('password')?.invalid && (form.get('password')?.dirty || form.get('password')?.touched) && form.get('password')?.errors?.['required']"
+      >
+        Password is required
+      </mat-error>
+    </mat-form-field>
+    <span class="form-actions__forget">Forget password?</span>
+    <div class="form-actions">
+      <button
+        class="form-actions__login"
+        mat-raised-button
+        color="primary"
+        type="submit"
+      >
+        Sign in
+      </button>
+    </div>
+  </form>
+</div>

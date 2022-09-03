@@ -1,0 +1,47 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+<app-layout>
+  <mat-toolbar class="header-title" role="heading">
+    <div class="toolbar-link">
+      <img
+        class="icon-image link-item"
+        [src]="homeIcon"
+        alt="home"
+        routerLink="/dashboard"
+      />
+      <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
+      <span class="link-item" routerLink="/dashboard">Dashboard</span>
+    </div>
+  </mat-toolbar>
+  <mat-card-content class="dashboard-content">
+    <div class="dashboard-content__head">
+      <h2 class="title">Metrics</h2>
+      <div class="content">
+        <mat-card class="infor-item">
+          <p class="label">Sales</p>
+          <p class="value">999,999</p>
+        </mat-card>
+        <mat-card class="infor-item">
+          <p class="label">Customers</p>
+          <p class="value">{{ numberCustomer }}</p>
+        </mat-card>
+        <mat-card class="infor-item">
+          <p class="label">Orders</p>
+          <p class="value">999,999</p>
+        </mat-card>
+        <mat-card class="infor-item">
+          <p class="label">Products</p>
+          <p class="value">{{ numberProduct }}</p>
+        </mat-card>
+      </div>
+    </div>
+    <div class="dashboard-content__chart">
+      <div class="chart">
+        <app-line-chart></app-line-chart>
+      </div>
+      <div class="announcements">
+        <h2 class="title">Announcements</h2>
+      </div>
+    </div>
+  </mat-card-content>
+</app-layout>

@@ -1,0 +1,117 @@
+@import 'src/app/styles/colors';
+@import 'src/app/styles/variables';
+@import 'src/app/styles/font';
+
+.header-title {
+    background-color: unset;
+    height: 60px;
+    .toolbar-link {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        .icon-image {
+            height: 16px;
+        }
+        .slash-icon {
+            margin: 0 5px;
+        }
+        .link-item {
+            cursor: pointer;
+        }
+    }
+
+    span {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 25px;
+        color: #a2acb5;
+    }
+}
+
+.setting-content {
+    display: block;
+    padding: 0 8px;
+    .mat-form-field-appearance-outline .mat-form-field-infix {
+        padding: 0.7em 0 0.7em 0 !important;
+        border-top: 0.5em solid rgba(0, 0, 0, 0) !important;
+    }
+    &__wrapper {
+        box-shadow: none;
+        margin: 16px;
+        &-title {
+            .title {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 25px;
+            }
+        }
+        &-content {
+            display: flex;
+            width: 70%;
+            .upload-image {
+                position: relative;
+                width: 150px;
+                height: 150px;
+                margin-right: 40px;
+                .select-file {
+                    position: absolute;
+                    width: 150px;
+                    height: 150px;
+                    top: 0;
+                    left: 0;
+                    opacity: 0;
+                    cursor: pointer;
+                }
+            }
+            .avatar-image {
+                width: 150px;
+                height: 150px;
+            }
+            .form-content {
+                width: 100%;
+            }
+            .row-item {
+                display: flex;
+                justify-content: space-between;
+                &__field {
+                    width: 47%;
+                    .label {
+                        margin: 0;
+                    }
+                    .field-input {
+                        width: 100%;
+                    }
+                }
+                &__field-address {
+                    .field-input {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                }
+                &__field-sub {
+                    width: 30%;
+                }
+                &__field-full {
+                    width: 100%;
+                    .field-input {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+    .action-form {
+        margin: 16px;
+        margin-top: 30px;
+        .btn-action {
+            width: 100px;
+        }
+        .btn-save {
+            border-color: #536dfe;
+            margin-right: 20px;
+        }
+        .btn-cancel {
+            border-color: #f44336;
+        }
+    }
+}

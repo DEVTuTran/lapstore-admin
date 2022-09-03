@@ -1,0 +1,64 @@
+<div class="sidebar">
+  <mat-list>
+    <mat-list-item
+      routerLink="{{ routes.DASHBOARD }}"
+      routerLinkActive="active"
+    >
+      <mat-icon>home</mat-icon> Dashboard
+    </mat-list-item>
+    <mat-list-item
+      routerLink="{{ routes.CUSTOMERS }}"
+      routerLinkActive="active"
+    >
+      <mat-icon>people</mat-icon> Customers
+    </mat-list-item>
+    <mat-list-item routerLink="{{ routes.PRODUCTS }}" routerLinkActive="active">
+      <mat-icon>inventory</mat-icon> Products
+    </mat-list-item>
+    <mat-list-item
+      routerLink="{{ routes.INVENTORY }}"
+      routerLinkActive="active"
+    >
+      <mat-icon>widgets</mat-icon> Inventory
+    </mat-list-item>
+    <mat-list-item routerLink="{{ routes.ORDERS }}" routerLinkActive="active">
+      <mat-icon>assignment</mat-icon> Orders
+    </mat-list-item>
+  </mat-list>
+
+  <div class="user-setting">
+    <mat-list>
+      <mat-card class="user-infor">
+        <mat-card-header>
+          <img
+            mat-card-avatar
+            *ngIf="user?.profile?.photo && !isLoading; else elsephoto"
+            [src]="user.profile?.photo"
+            alt="avatar"
+          />
+          <ng-template #elsephoto>
+            <img mat-card-avatar [src]="photo" alt="avatar" />
+          </ng-template>
+          <mat-card-title
+            class="user-name"
+            *ngIf="user?.username && !isLoading; else elseUsername"
+            >{{ user.username }}</mat-card-title
+          >
+          <ng-template #elseUsername>
+            <mat-card-title class="user-name">username</mat-card-title>
+          </ng-template>
+          <mat-card-subtitle class="user-role">Admin</mat-card-subtitle>
+          <button mat-icon-button (click)="onSignOut()" class="signout-btn">
+            <mat-icon class="logout-icon">logout</mat-icon>
+          </button>
+        </mat-card-header>
+      </mat-card>
+      <mat-list-item
+        routerLink="{{ routes.SETTINGS }}"
+        routerLinkActive="active"
+      >
+        <mat-icon>settings</mat-icon>Settings
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

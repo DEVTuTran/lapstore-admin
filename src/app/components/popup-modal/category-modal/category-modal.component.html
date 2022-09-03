@@ -1,0 +1,67 @@
+<div class="edit-brand-modal">
+  <div class="edit-brand-modal__header">
+    <h4 class="title">{{ data.title }}</h4>
+  </div>
+
+  <div
+    mat-dialog-content
+    class="edit-brand-modal__content"
+    *ngIf="data.type == 'add'; else edit"
+  >
+    {{ data.message }}?
+  </div>
+
+  <ng-template #edit>
+    <div mat-dialog-content class="edit-brand-modal__content">
+      {{ data.message }}
+      <span class="name">{{ data.name }}</span
+      >?
+    </div>
+  </ng-template>
+
+  <ng-template #edit>
+    <div mat-dialog-content class="edit-brand-modal__content">
+      {{ data.message }}
+      <span class="name">{{ data.name }} </span>?
+    </div>
+  </ng-template>
+
+  <form [formGroup]="categoryForm" class="edit-brand-modal__form">
+    <mat-form-field appearance="outline" class="field-quantity">
+      <input
+        matInput
+        placeholder="Enter category name"
+        type="text"
+        formControlName="name"
+      />
+      <mat-error *ngIf="!categoryForm.get('quantity')?.errors?.['required']">
+        Category name is more than 1 characters!
+      </mat-error>
+      <mat-error
+        *ngIf="categoryForm.get('quantity')?.invalid && (categoryForm.get('quantity')?.dirty || categoryForm.get('quantity')?.touched) && categoryForm.get('quantity')?.errors?.['required']"
+      >
+        Category name is required
+      </mat-error>
+    </mat-form-field>
+  </form>
+  <div mat-dialog-actions class="edit-brand-modal__action">
+    <button
+      mat-button
+      (click)="onNoClick()"
+      class="btn-action btn-cancel"
+      type="button"
+    >
+      Cancel
+    </button>
+    <button
+      mat-button
+      mat-dialog-close
+      cdkFocusInitial
+      (click)="onClick()"
+      type="button"
+      class="btn-action btn-edit"
+    >
+      {{ data.type == "add" ? "Add" : "Edit" }}
+    </button>
+  </div>
+</div>

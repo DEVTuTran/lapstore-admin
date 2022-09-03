@@ -1,0 +1,341 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+<mat-toolbar class="header-title" role="heading">
+  <div class="toolbar-link">
+    <img
+      class="icon-image link-item"
+      [src]="homeIcon"
+      alt="home"
+      routerLink="/dashboard"
+    />
+    <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
+    <span class="link-item" routerLink="/products">Products</span>
+    <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
+    <span>Edit</span>
+    <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
+    <span>{{ productInfor && productInfor.productName }}</span>
+  </div>
+</mat-toolbar>
+<mat-card-content class="product-edit">
+  <form
+    [formGroup]="formDataProduct"
+    *ngIf="formDataProduct"
+    class="form-content"
+  >
+    <mat-card class="product-edit__content">
+      <div class="form-content__basic">
+        <mat-card-title class="form-content__title">
+          <p class="title">Thông tin cơ bản</p>
+        </mat-card-title>
+        <div class="form-content__basic-container">
+          <div class="upload-image">
+            <input
+              type="file"
+              class="select-file"
+              (change)="uploadImage($event)"
+            />
+            <img
+              mat-card-avatar
+              class="product-thumbnail"
+              [src]="(productInfor && productInfor.productThumbnail) || photo"
+              alt="product-thumbnail"
+            />
+          </div>
+          <div class="content">
+            <div class="row-item">
+              <div class="row-item__field">
+                <p class="label">Product name</p>
+                <mat-form-field appearance="outline" class="field-input">
+                  <input
+                    matInput
+                    placeholder="Product name"
+                    type="text"
+                    formControlName="productName"
+                  />
+                  <mat-error
+                    *ngIf="!formDataProduct.get('productName')?.errors?.['required']"
+                  >
+                    Product name must be longer than 10 characters!
+                  </mat-error>
+                  <mat-error
+                    *ngIf="formDataProduct.get('productName')?.invalid && (formDataProduct.get('productName')?.dirty || formDataProduct.get('productName')?.touched) && formDataProduct.get('productName')?.errors?.['required']"
+                  >
+                    Product name is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="row-item__field">
+                <p class="label">Brand</p>
+                <mat-form-field appearance="outline" class="field-input">
+                  <mat-select
+                    placeholder="Brand"
+                    formControlName="brand"
+                    (selectionChange)="selectBrands($event)"
+                  >
+                    <mat-option
+                      *ngFor="let brand of brands"
+                      [value]="brand._id"
+                    >
+                      {{ brand.brandName }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row-item">
+              <div
+                formArrayName="category"
+                class="row-item__field"
+                *ngIf="formCategory"
+              >
+                <ng-container
+                  *ngFor="let formGroup of formCategory.controls; let i = index"
+                >
+                  <div [formGroupName]="i" *ngIf="i != 0">
+                    <p class="label">Category {{ i }}</p>
+                    <mat-form-field appearance="outline" class="field-input">
+                      <mat-select
+                        placeholder="Category"
+                        [disabled]="true"
+                        formControlName="id"
+                      >
+                        <mat-option
+                          *ngFor="let category of categories"
+                          [value]="category._id"
+                        >
+                          {{ category.categoryName }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </ng-container>
+              </div>
+              <div
+                formArrayName="subCategory"
+                class="row-item__field"
+                *ngIf="formSubCategory"
+              >
+                <ng-container
+                  *ngFor="
+                    let formGroup of formSubCategory.controls;
+                    let i = index
+                  "
+                >
+                  <div [formGroupName]="i" *ngIf="i != 0">
+                    <p class="label">Sub Category {{ i }}</p>
+                    <mat-form-field appearance="outline" class="field-input">
+                      <mat-select
+                        placeholder="Sub Category"
+                        formControlName="id"
+                      >
+                        <mat-option
+                          *ngFor="let subCategory of arraySubcategory[i]"
+                          [value]="subCategory._id"
+                        >
+                          {{ subCategory.subCategoryName }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="row-item">
+              <div class="row-item__field-number">
+                <div class="field-input">
+                  <div class="field-input__item-price">
+                    <p class="label">Price (VND)</p>
+
+                    <mat-form-field
+                      appearance="outline"
+                      class="row-item__field-sub"
+                    >
+                      <button
+                        mat-icon-button
+                        matPrefix
+                        class="remove-action"
+                        type="button"
+                        (click)="decrementPrice()"
+                      >
+                        <mat-icon>remove</mat-icon>
+                      </button>
+                      <input
+                        matInput
+                        type="number"
+                        formControlName="price"
+                        class="input-outline"
+                      />
+                      <button
+                        mat-icon-button
+                        matSuffix
+                        class="add-action"
+                        type="button"
+                        (click)="incrementPrice()"
+                      >
+                        <mat-icon>add</mat-icon>
+                      </button>
+                      <mat-error
+                        *ngIf="!formDataProduct.get('price')?.errors?.['required']"
+                      >
+                        Price must be greater than 1.000.000đ!
+                      </mat-error>
+                      <mat-error
+                        *ngIf="formDataProduct.get('price')?.invalid && (formDataProduct.get('price')?.dirty || formDataProduct.get('price')?.touched) && formDataProduct.get('price')?.errors?.['required']"
+                      >
+                        Price is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="field-input__item">
+                    <p class="label">Discount (%)</p>
+
+                    <mat-form-field
+                      appearance="outline"
+                      class="row-item__field-sub"
+                    >
+                      <button
+                        mat-icon-button
+                        matPrefix
+                        class="remove-action"
+                        type="button"
+                        (click)="decrementDiscount()"
+                      >
+                        <mat-icon>remove</mat-icon>
+                      </button>
+                      <input
+                        matInput
+                        type="number"
+                        formControlName="discount"
+                      />
+                      <button
+                        mat-icon-button
+                        matSuffix
+                        class="add-action"
+                        type="button"
+                        (click)="incrementDiscount()"
+                      >
+                        <mat-icon>add</mat-icon>
+                      </button>
+                      <mat-error
+                        *ngIf="!formDataProduct.get('discount')?.errors?.['required']"
+                      >
+                        Discount must be greater or equal to 0!
+                      </mat-error>
+                      <mat-error
+                        *ngIf="formDataProduct.get('discount')?.invalid && (formDataProduct.get('discount')?.dirty || formDataProduct.get('discount')?.touched) && formDataProduct.get('discount')?.errors?.['required']"
+                      >
+                        Discount is required
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="field-input__item status">
+                    <p class="label">status</p>
+
+                    <div class="stock">
+                      <div
+                        *ngIf="productInfor.status == 1; else status"
+                        class="in-stock"
+                      >
+                        In stock
+                      </div>
+                      <ng-template #status>
+                        <div class="out-of-stock">Out of stock</div>
+                      </ng-template>
+                      <span
+                        *ngIf="productInfor.status == 0"
+                        class="add-to-inventory"
+                        (click)="openDialogAdd(productInfor.productName)"
+                        >Add to inventory</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row-item">
+              <div class="row-item__field-full">
+                <p class="label">Description</p>
+                <mat-form-field appearance="outline" class="field-input">
+                  <textarea
+                    matInput
+                    placeholder="Description"
+                    formControlName="description"
+                  ></textarea>
+                  <mat-error
+                    *ngIf="!formDataProduct.get('description')?.errors?.['required']"
+                  >
+                    Description must be longer than 10 characters!
+                  </mat-error>
+                  <mat-error
+                    *ngIf="formDataProduct.get('description')?.invalid && (formDataProduct.get('description')?.dirty || formDataProduct.get('description')?.touched) && formDataProduct.get('description')?.errors?.['required']"
+                  >
+                    Description is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="product-edit__content">
+      <div class="form-content__detail">
+        <mat-card-title class="form-content__title">
+          <p class="title">Thông tin chi tiết</p>
+        </mat-card-title>
+        <div class="form-content__detail-container">
+          <div class="row-details" formArrayName="specs">
+            <ng-container
+              *ngFor="let formGroup of formArr.controls; let i = index"
+            >
+              <div [formGroupName]="i" class="detail-item">
+                <textarea
+                  matInput
+                  type="text"
+                  formControlName="key"
+                  class="key"
+                  readonly
+                ></textarea>
+                <mat-form-field appearance="outline" class="field-input">
+                  <input
+                    matInput
+                    placeholder="Nhập vào giá trị"
+                    type="text"
+                    formControlName="value"
+                  />
+                </mat-form-field>
+              </div>
+            </ng-container>
+          </div>
+          <p
+            *ngIf="!hideButton"
+            type="button"
+            (click)="changeItem()"
+            class="show-all"
+          >
+            Hiển thị đầy đủ danh sách
+          </p>
+        </div>
+      </div>
+    </mat-card>
+  </form>
+  <div class="action-form">
+    <button
+      type="button"
+      mat-stroked-button
+      color="primary"
+      class="btn-action btn-save"
+      (click)="openDialog(productInfor.productName)"
+    >
+      Edit
+    </button>
+    <button
+      mat-stroked-button
+      color="warn"
+      class="btn-action btn-cancel"
+      type="button"
+      (click)="onGoBack()"
+    >
+      Go Back
+    </button>
+  </div>
+</mat-card-content>

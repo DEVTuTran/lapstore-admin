@@ -1,0 +1,34 @@
+@import 'src/app/styles/colors';
+@import 'src/app/styles/variables';
+@import 'src/app/styles/font';
+
+.header-title {
+    background-color: unset;
+    height: 60px;
+    .toolbar-link {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        .icon-image {
+            height: 16px;
+        }
+        .slash-icon {
+            margin: 0 5px;
+        }
+        .link-item {
+            cursor: pointer;
+        }
+    }
+
+    span {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 25px;
+        color: #a2acb5;
+    }
+}
+
+.setting-content {
+    display: block;
+    padding: 0 16px;
+}

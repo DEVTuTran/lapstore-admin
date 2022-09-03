@@ -1,0 +1,82 @@
+.header-title {
+    background-color: unset;
+    height: 60px;
+    .toolbar-link {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        .icon-image {
+            height: 16px;
+        }
+        .slash-icon {
+            margin: 0 5px;
+        }
+        .link-item {
+            cursor: pointer;
+        }
+    }
+
+    span {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 25px;
+        color: #a2acb5;
+    }
+}
+.customers-content {
+    margin: 0 16px;
+    padding: 0 8px;
+    table {
+        width: 100%;
+    }
+    .avatar {
+        display: flex;
+        margin-right: 10px;
+    }
+    .element-name {
+        cursor: pointer;
+    }
+    .username {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        color: #101828;
+    }
+    .field {
+        padding: 0 10px;
+    }
+    .role {
+        padding: 2px 8px;
+        border-radius: 16px;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        text-align: center;
+    }
+    .admin {
+        background: #fef3f2;
+        color: #f04438;
+    }
+    .customer {
+        background: #ecfdf3;
+        color: #12b76a;
+    }
+    .text {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        color: #616161;
+    }
+    &__action {
+        display: flex;
+        margin-bottom: 20px;
+        justify-content: flex-end;
+        .search-input {
+            width: 40%;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid gray;
+            background: #ffffff;
+        }
+    }
+}

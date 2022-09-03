@@ -1,0 +1,161 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+<mat-card-content class="category-content">
+  <mat-card class="category-content__wrapper">
+    <mat-card-title class="category-content__wrapper-title">
+      <p class="title">Category</p>
+      <button mat-button (click)="openDialogAdd()">
+        <img [src]="addIcon" />
+        Add new category
+      </button>
+    </mat-card-title>
+    <table
+      mat-table
+      [dataSource]="listCategories"
+      class="category-content__table"
+      multiTemplateDataRows
+    >
+      <ng-container matColumnDef="categoryId">
+        <th mat-header-cell *matHeaderCellDef>Category ID</th>
+        <td mat-cell *matCellDef="let element" class="field id">
+          {{ element._id }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="categoryName">
+        <th mat-header-cell *matHeaderCellDef>Category Name</th>
+        <td mat-cell *matCellDef="let element" class="field name">
+          {{ element.categoryName }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="subCategory">
+        <th mat-header-cell *matHeaderCellDef>SubCategory</th>
+        <td mat-cell *matCellDef="let element" class="field sub-category">
+          <span class="icon" (click)="getSubCategories(element._id)">
+            <img [src]="element?.isExpanded ? chervonUp : chervonDown" />
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="createAt">
+        <th mat-header-cell *matHeaderCellDef>Create At</th>
+        <td mat-cell *matCellDef="let element" class="field created">
+          {{ element.createdAt | date: "dd MMM yyyy" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element" class="field status">
+          <span
+            (click)="
+              openDialogConfirm(
+                element._id,
+                element.active,
+                element.categoryName
+              )
+            "
+          >
+            <mat-slide-toggle [checked]="element.active == 1"></mat-slide-toggle
+          ></span>
+          <span class="label active" *ngIf="element.active == 1; else unactive"
+            >Active</span
+          >
+          <ng-template #unactive>
+            <span class="label unactive">Not Active</span>
+          </ng-template>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action" class="field action">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+          <div class="list-actions">
+            <button
+              mat-icon-button
+              class="edit-action"
+              type="button"
+              (click)="openDialogEdit(element._id, element.categoryName)"
+            >
+              <img [src]="editIcon" />
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [attr.colspan]="tableColums.length"
+        >
+          <div [@detailExpand]="element.isExpanded ? 'expanded' : 'collapsed'">
+            <div class="list-subcategory">
+              <div
+                *ngFor="let sub of element.subCategory"
+                class="row-subcategory"
+              >
+                <div class="id">{{ sub._id }}</div>
+
+                <div class="name">{{ sub.subCategoryName }}</div>
+                <div class="sub-category"></div>
+                <div class="created">
+                  {{ sub.createdAt | date: "dd MMM yyyy" }}
+                </div>
+                <div class="status">
+                  <span
+                    (click)="
+                      openDialogConfirm(
+                        element._id,
+                        element.active,
+                        element.brandName
+                      )
+                    "
+                  >
+                    <mat-slide-toggle
+                      [checked]="element.active == 1"
+                    ></mat-slide-toggle
+                  ></span>
+                  <span
+                    class="label active"
+                    *ngIf="element.active == 1; else unactive"
+                    >Active</span
+                  >
+                  <ng-template #unactive>
+                    <span class="label unactive">Not Active</span>
+                  </ng-template>
+                </div>
+                <div class="action">
+                  <div class="list-actions">
+                    <button
+                      mat-icon-button
+                      class="edit-action"
+                      type="button"
+                      (click)="openEditCustomer(element._id)"
+                    >
+                      <img [src]="editIcon" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="tableColums"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: tableColums"
+        [class.expanded-row]="row.isExpanded"
+        class="col-expanded-row"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="expand-row"
+      ></tr>
+    </table>
+  </mat-card>
+</mat-card-content>

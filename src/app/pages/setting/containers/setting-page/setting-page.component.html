@@ -1,0 +1,25 @@
+<app-layout>
+  <mat-toolbar class="header-title" role="heading">
+    <div class="toolbar-link">
+      <img
+        class="icon-image link-item"
+        [src]="homeIcon"
+        alt="home"
+        routerLink="/customers"
+      />
+      <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
+      <span class="link-item" routerLink="/settings">Settings</span>
+    </div>
+  </mat-toolbar>
+  <mat-tab-group class="setting-content">
+    <mat-tab label="Edit information">
+      <app-information-setting></app-information-setting>
+    </mat-tab>
+    <mat-tab label="Brand settings">
+      <app-brand-setting></app-brand-setting>
+    </mat-tab>
+    <mat-tab label="Category settings">
+      <app-category-setting></app-category-setting>
+    </mat-tab>
+  </mat-tab-group>
+</app-layout>

@@ -1,0 +1,58 @@
+<div class="delete-modal">
+  <div class="delete-modal__header">
+    <svg
+      width="56"
+      height="56"
+      viewBox="0 0 56 56"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4 28C4 14.7452 14.7452 4 28 4C41.2548 4 52 14.7452 52 28C52 41.2548 41.2548 52 28 52C14.7452 52 4 41.2548 4 28Z"
+        fill="#FEE4E2"
+      />
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M18.25 28C18.25 22.617 22.617 18.25 28 18.25C33.383 18.25 37.75 22.617 37.75 28C37.75 33.383 33.383 37.75 28 37.75C22.617 37.75 18.25 33.383 18.25 28ZM36.25 28C36.25 23.4455 32.5545 19.75 28 19.75C23.4455 19.75 19.75 23.4455 19.75 28C19.75 32.5545 23.4455 36.25 28 36.25C32.5545 36.25 36.25 32.5545 36.25 28ZM28.0081 22.7525L27.99 22.7524C27.7134 22.7551 27.4498 22.87 27.2597 23.0709C27.0695 23.2717 26.9692 23.5413 26.9817 23.8177L27.2508 29.5353C27.2957 30.4883 28.7044 30.4883 28.7492 29.5353L29.0178 23.8188C29.0305 23.5379 28.9275 23.2653 28.7331 23.0638C28.5504 22.8745 28.3018 22.7633 28.0392 22.7531L28.0211 22.7526L28.0081 22.7525ZM27.0625 32.3083C27.0625 32.826 27.4822 33.2458 28 33.2458C28.5178 33.2458 28.9375 32.826 28.9375 32.3083C28.9375 31.7905 28.5178 31.3708 28 31.3708C27.4822 31.3708 27.0625 31.7905 27.0625 32.3083Z"
+        fill="#D92D20"
+      />
+      <path
+        d="M28 48C16.9543 48 8 39.0457 8 28H0C0 43.464 12.536 56 28 56V48ZM48 28C48 39.0457 39.0457 48 28 48V56C43.464 56 56 43.464 56 28H48ZM28 8C39.0457 8 48 16.9543 48 28H56C56 12.536 43.464 0 28 0V8ZM28 0C12.536 0 0 12.536 0 28H8C8 16.9543 16.9543 8 28 8V0Z"
+        fill="#FEF3F2"
+      />
+    </svg>
+    <h4 class="title">{{ data.title }}</h4>
+  </div>
+  <div
+    mat-dialog-content
+    class="delete-modal__content"
+    *ngIf="data.type == 'inventory'"
+  >
+    Would you like to delete
+    <span class="name">{{ data.name }} </span>from inventory?
+  </div>
+  <div
+    mat-dialog-content
+    class="delete-modal__content"
+    *ngIf="data.type == 'product'"
+  >
+    Would you like to delete
+    <span class="name">{{ data.name }} </span>?
+  </div>
+  <p *ngIf="data.message" class="message">{{ data.message }}</p>
+  <div mat-dialog-actions class="delete-modal__action">
+    <button mat-button (click)="onNoClick()" class="btn-action btn-cancel">
+      Cancel
+    </button>
+    <button
+      mat-button
+      mat-dialog-close
+      cdkFocusInitial
+      (click)="onClick()"
+      class="btn-action btn-delete"
+    >
+      Delete
+    </button>
+  </div>
+</div>

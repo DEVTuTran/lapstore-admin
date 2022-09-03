@@ -1,0 +1,25 @@
+<div class="not-found-page">
+  <mat-grid-list class="not-found-page__content" cols="12">
+    <mat-grid-tile class="not-found-page__content-left" colspan="7">
+      left
+    </mat-grid-tile>
+    <mat-grid-tile class="not-found-page__content-right" colspan="5">
+      <mat-card class="not-found-page__card">
+        <mat-card-content class="not-found-page__card-content">
+          <h1 class="not-found-page__card-title">SORRY !</h1>
+
+          <p class="not-found-page__card-sub-title">
+            The Page You're Looking For Was Not Found
+          </p>
+
+          <span
+            class="not-found-page__card-link"
+            [routerLink]="routes.DASHBOARD"
+          >
+            Go Back
+          </span>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
