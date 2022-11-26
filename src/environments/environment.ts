@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 export const environment = {
   production: false,
-  api_url: 'http://localhost:5000/api/',
+  api_url: 'http://localhost:5555/api/',
   province_api: 'https://provinces.open-api.vn/api/?depth=3',
   firebase: {
     apiKey: 'AIzaSyB-nck035aktj_6EUlqYIOhL7uuwBAWOx0',
@@ -14,7 +14,7 @@ export const environment = {
     appId: '1:452167768176:web:7b19229d01e00910687cb5',
     measurementId: 'G-G8MNR4ZJH8',
   },
-};
+}
 
 /*
  * For easier debugging in development mode, you can import the following file

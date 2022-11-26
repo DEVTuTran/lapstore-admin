@@ -1,19 +1,18 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { finalize, Observable } from 'rxjs';
-import { FileUpload } from 'src/app/models/file-upload.model';
-import { FileUploadService } from 'src/app/services/file-upload.service';
+import { Component, Inject, OnInit } from '@angular/core'
+import { FormControl, FormGroup, Validators } from '@angular/forms'
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
+import { FileUpload } from 'src/app/models/file-upload.model'
+import { FileUploadService } from 'src/app/services/file-upload.service'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 export interface DialogData {
-  title: string;
-  name: string;
-  thumbnail: string;
-  message: string;
-  isAdd: boolean;
-  isEdit: boolean;
-  type: string;
+  title: string
+  name: string
+  thumbnail: string
+  message: string
+  isAdd: boolean
+  isEdit: boolean
+  type: string
 }
 @Component({
   selector: 'app-edit-brand',
@@ -21,35 +20,34 @@ export interface DialogData {
   styleUrls: ['./edit-brand.component.scss'],
 })
 export class EditBrandComponent implements OnInit {
-  public brandForm!: FormGroup;
-  private basePath = '/uploads';
+  public brandForm!: FormGroup
 
-  selectedFiles?: FileList;
-  currentFileUpload?: FileUpload;
-  percentage: number = 0;
+  selectedFiles?: FileList
+  currentFileUpload?: FileUpload
+  percentage: number = 0
 
-  photo: string = '../../../assets/icons/no-image-icon.svg';
+  photo: string = '../../../assets/icons/no-image-icon.svg'
 
   constructor(
-    private fileUploadService: FileUploadService,
-    private storage: AngularFireStorage,
     public dialogRef: MatDialogRef<EditBrandComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private fileUploadService: FileUploadService,
+    private snackBar: MatSnackBar
   ) {}
 
   onNoClick(): void {
-    this.dialogRef.close();
+    this.dialogRef.close()
   }
 
   onClick() {
-    this.data.isEdit = true;
-    this.data.name = this.brandForm.value.name;
-    this.data.thumbnail = this.brandForm.value.thumbnail;
+    this.data.isEdit = true
+    this.data.name = this.brandForm.value.name
+    this.data.thumbnail = this.brandForm.value.thumbnail
     const newData = {
       brandName: this.data.name,
       brandThumbnail: this.data.thumbnail,
-    };
-    this.dialogRef.close({ newData, isEdit: this.data.isEdit });
+    }
+    this.dialogRef.close({ newData, isEdit: this.data.isEdit })
   }
 
   ngOnInit(): void {
@@ -59,56 +57,37 @@ export class EditBrandComponent implements OnInit {
         Validators.minLength(1),
       ]),
       thumbnail: new FormControl(this.data.thumbnail),
-    });
+    })
   }
 
-  // upload image
+  // upload image with firebase
+
   uploadImage(event: any) {
-    this.selectedFiles = event.target.files;
+    this.selectedFiles = event.target.files
 
     if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
+      const file: File | null = this.selectedFiles.item(0)
 
-      this.selectedFiles = undefined;
+      this.selectedFiles = undefined
 
       if (file) {
-        this.currentFileUpload = new FileUpload(file);
+        this.currentFileUpload = new FileUpload(file)
 
-        this.pushFileToStorage(this.currentFileUpload).subscribe(
-          (percentage) => {
-            this.percentage = Math.round(percentage ? percentage : 0);
+        this.fileUploadService.uploadImage(this.currentFileUpload.file).subscribe(
+          (data) => {
+            this.data.thumbnail = data.imagePath
+            this.brandForm.patchValue({
+              thumbnail: data.imagePath,
+            })
           },
           (error) => {
-            console.log(error);
+            this.snackBar.open('Create product not success', '', {
+              duration: 3000,
+              panelClass: 'snackbar-notification__not-success',
+            })
           }
-        );
+        )
       }
     }
-  }
-
-  pushFileToStorage(fileUpload: FileUpload): Observable<number | undefined> {
-    const filePath = `${this.basePath}/${fileUpload.file.name}`;
-    const storageRef = this.storage.ref(filePath);
-    const uploadTask = this.storage.upload(filePath, fileUpload.file);
-
-    uploadTask
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          storageRef.getDownloadURL().subscribe((downloadURL) => {
-            this.data.thumbnail = downloadURL;
-            this.brandForm.patchValue({
-              thumbnail: downloadURL,
-            });
-
-            fileUpload.url = downloadURL;
-            fileUpload.name = fileUpload.file.name;
-            this.fileUploadService.saveFileData(fileUpload);
-          });
-        })
-      )
-      .subscribe();
-
-    return uploadTask.percentageChanges();
   }
 }
