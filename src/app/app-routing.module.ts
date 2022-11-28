@@ -1,26 +1,27 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { CustomerListComponent } from './pages/customer/containers/customer-list/customer-list.component';
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
+import { CustomerListComponent } from './pages/customer/containers/customer-list/customer-list.component'
 import {
   CustomerComponent,
   CustomerEditComponent,
-} from './pages/customer/containers/index';
-import { DashboardPageComponent } from './pages/dashboard/containers/index';
+} from './pages/customer/containers/index'
+import { DashboardPageComponent } from './pages/dashboard/containers/index'
 import {
   InventoryListComponent,
   InventoryPageComponent,
-} from './pages/inventory/containers';
-import { InventoryDetailComponent } from './pages/inventory/containers/index';
-import { NotFoundComponent } from './pages/not-found/not-found.component';
-import { OrderComponent } from './pages/order/containers';
+} from './pages/inventory/containers'
+import { InventoryDetailComponent } from './pages/inventory/containers/index'
+import { NotFoundComponent } from './pages/not-found/not-found.component'
+import { OrderComponent, OrderViewComponent } from './pages/order/containers'
+import { OrderEditComponent } from './pages/order/containers/order-edit/order-edit.component'
 import {
   ProductComponent,
   ProductCreateComponent,
   ProductEditComponent,
   ProductViewComponent,
   ProductDetailComponent,
-} from './pages/product/containers/index';
-import { SettingComponent } from './pages/setting/containers';
+} from './pages/product/containers/index'
+import { SettingComponent } from './pages/setting/containers'
 
 const routes: Routes = [
   {
@@ -39,8 +40,12 @@ const routes: Routes = [
   },
   {
     path: 'orders',
-    pathMatch: 'full',
     component: OrderComponent,
+    children: [
+      { path: '', pathMatch: 'full', component: OrderViewComponent },
+      { path: 'view', component: OrderViewComponent },
+      { path: 'edit/:id', component: OrderEditComponent },
+    ],
   },
   {
     path: 'products',
@@ -73,8 +78,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () =>
-      import('./pages/auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () => import('./pages/auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: '',
@@ -85,7 +89,7 @@ const routes: Routes = [
     path: '**',
     redirectTo: '404',
   },
-];
+]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

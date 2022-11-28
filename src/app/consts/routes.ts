@@ -16,4 +16,6 @@ export enum routes {
   SETTINGS = '/settings',
   NOTIFICATION = '/notification',
   LOGIN = '/login',
+  // order
+  EDIT_ORDER = '/orders/edit/',
 }

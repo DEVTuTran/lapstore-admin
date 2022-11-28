@@ -1,0 +1,117 @@
+.header-title {
+    background-color: unset;
+    height: 60px;
+
+    .toolbar-link {
+        display: flex;
+        width: 100%;
+        align-items: center;
+
+        .icon-image {
+            height: 16px;
+        }
+
+        .slash-icon {
+            margin: 0 5px;
+        }
+
+        .link-item {
+            cursor: pointer;
+        }
+    }
+
+    span {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 25px;
+        color: #a2acb5;
+    }
+}
+
+.product-content {
+    margin: 0 16px;
+    padding: 0 8px;
+
+    table {
+        width: 100%;
+    }
+
+    .element-name {
+        cursor: pointer;
+    }
+
+    .in-stock {
+        color: #16b364;
+        background-color: #ecfdf3;
+        padding: 5px 10px;
+        border-radius: 16px;
+    }
+
+    .out-of-stock {
+        color: #b93815;
+        background-color: #fef6ee;
+        padding: 5px 10px;
+        border-radius: 16px;
+    }
+
+    &__action {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+
+        .btn-filter {
+            cursor: pointer;
+        }
+
+        .search-input {
+            width: 50%;
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: 1px solid gray;
+            background: #ffffff;
+        }
+
+        .search-input:focus-visible {
+            outline: none;
+        }
+
+        .create-product {
+            width: 15%;
+            border-radius: 30px;
+            margin-left: 20px;
+        }
+    }
+}
+.product-item{
+    display: flex;
+    &:not(:last-child){
+        border-bottom: 1px solid gray;
+    }
+}
+.product-column{
+    width: 20%;
+}
+.cancel{
+    color: #b93815;
+        background-color: #fef6ee;
+        padding: 5px 10px;
+        border-radius: 16px;
+}
+.waiting{
+    color: #AE813B;
+        background-color: #FEF9F0;
+        padding: 5px 10px;
+        border-radius: 16px;
+}
+.delivered{
+    color: #026AA2;
+    background-color: #F0F9FF;
+        padding: 5px 10px;
+        border-radius: 16px;
+}
+.delivering{
+    color: #16b364;
+        background-color: #ecfdf3;
+        padding: 5px 10px;
+        border-radius: 16px;
+}

@@ -1,0 +1,52 @@
+<div class="edit-brand-modal">
+  <div class="edit-brand-modal__header">
+    <h4 class="title">{{ data.title }}</h4>
+  </div>
+
+  <div
+    mat-dialog-content
+    class="edit-brand-modal__content"
+  >
+    {{ data.message }}?
+  </div>
+
+  <form [formGroup]="order" class="edit-brand-modal__form">
+    
+    <mat-form-field appearance="outline" class="field-quantity">
+        <mat-select
+        formControlName="status">
+          <mat-option *ngFor="let item of listStatus" [value]="item.value">
+            {{item.label}}
+          </mat-option>
+        </mat-select>
+      <mat-error *ngIf="!order.get('quantity')?.errors?.['required']">
+        Status is more than 1!
+      </mat-error>
+      <mat-error
+        *ngIf="order.get('quantity')?.invalid && (order.get('quantity')?.dirty || order.get('quantity')?.touched) && order.get('quantity')?.errors?.['required']"
+      >
+        Status is required
+      </mat-error>
+    </mat-form-field>
+  </form>
+  <div mat-dialog-actions class="edit-brand-modal__action">
+    <button
+      mat-button
+      (click)="onNoClick()"
+      class="btn-action btn-cancel"
+      type="button"
+    >
+      Cancel
+    </button>
+    <button
+      mat-button
+      mat-dialog-close
+      cdkFocusInitial
+      (click)="onClick()"
+      type="button"
+      class="btn-action btn-edit"
+    >
+      Change
+    </button>
+  </div>
+</div>

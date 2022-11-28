@@ -255,7 +255,7 @@ export class ProductEditComponent implements OnInit {
             })
           },
           (error) => {
-            this.snackBar.open('Create product not success', '', {
+            this.snackBar.open('Upload image not success', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__not-success',
             })
