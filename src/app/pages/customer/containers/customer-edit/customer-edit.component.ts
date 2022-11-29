@@ -4,10 +4,9 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { FileUpload } from 'src/app/models/file-upload.model'
 import { User, userInfor } from 'src/app/models/user.model'
 import { AuthService } from 'src/app/pages/auth/services/auth.service'
-import { Observable } from 'rxjs'
-import { finalize } from 'rxjs/operators'
 import { SettingService } from 'src/app/pages/setting/services/setting.service'
 import { ActivatedRoute } from '@angular/router'
+import { FileUploadService } from 'src/app/services/file-upload.service'
 
 @Component({
   selector: 'app-customer-edit',
@@ -16,7 +15,6 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class CustomerEditComponent implements OnInit {
   public formUserInfor!: FormGroup
-  private basePath = '/uploads'
 
   isLoading: boolean = false
   userId!: string | null
@@ -39,7 +37,8 @@ export class CustomerEditComponent implements OnInit {
     private snackBar: MatSnackBar,
     public authService: AuthService,
     public settingService: SettingService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private fileUploadService: FileUploadService
   ) {}
 
   formatData(data: any) {
@@ -166,14 +165,22 @@ export class CustomerEditComponent implements OnInit {
 
       if (file) {
         this.currentFileUpload = new FileUpload(file)
-        // this.pushFileToStorage(this.currentFileUpload).subscribe(
-        //   (percentage) => {
-        //     this.percentage = Math.round(percentage ? percentage : 0)
-        //   },
-        //   (error) => {
-        //     console.log(error)
-        //   }
-        // )
+        this.fileUploadService.uploadImage(this.currentFileUpload.file).subscribe(
+          (data) => {
+            this.userInfor.photo = data.imagePath
+
+            this.formUserInfor.controls['photo'].markAsDirty()
+            this.formUserInfor.patchValue({
+              photo: data.imagePath,
+            })
+          },
+          (error) => {
+            this.snackBar.open('Upload image not success', '', {
+              duration: 3000,
+              panelClass: 'snackbar-notification__not-success',
+            })
+          }
+        )
       }
     }
     this.isLoading = false

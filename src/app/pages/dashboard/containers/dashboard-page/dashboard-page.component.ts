@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { IIventory } from 'src/app/models/inventory.model';
-import { CustomerService } from 'src/app/pages/customer/services/customer.service';
-import { InventoryService } from 'src/app/pages/inventory/services/inventory.service';
-import { ProductService } from 'src/app/pages/product/services/product.service';
+import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
+import { DashboardService } from 'src/app/pages/dashboard/services/dashboard.service'
+import { formatVND } from 'src/utils/helper'
+import { routes } from 'src/app/consts'
+import { ChartDataSets } from 'chart.js'
 
 @Component({
   selector: 'app-dashboard-page',
@@ -11,39 +11,47 @@ import { ProductService } from 'src/app/pages/product/services/product.service';
   styleUrls: ['./dashboard-page.component.scss'],
 })
 export class DashboardPageComponent implements OnInit {
-  homeIcon: string = '../../../assets/icons/home-icon.svg';
-  slashIcon: string = '../../../assets/icons/slash-icon.svg';
+  homeIcon: string = '../../../assets/icons/home-icon.svg'
+  slashIcon: string = '../../../assets/icons/slash-icon.svg'
+  formatVND = formatVND
 
-  numberProduct!: number;
-  numberCustomer!: number;
+  numberProduct!: number
+  numberCustomer!: number
+  dashboardInfo: any
+  isLoading: boolean = false
+  chart: any
 
-  isLoading: boolean = false;
+  public lineChartData: ChartDataSets[] = [
+    {
+      data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      label: 'Sales order',
+      lineTension: 0,
+    },
+  ]
 
-  constructor(
-    private customerService: CustomerService,
-    private inventoryService: InventoryService,
-    private router: Router
-  ) {}
+  constructor(private dashboardService: DashboardService, private router: Router) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.getProductNumber();
-    this.getCustomerNumber();
-    this.isLoading = false;
+    this.isLoading = true
+    this.getDashboardInfo()
+    this.isLoading = false
   }
 
-  getProductNumber() {
-    this.inventoryService.getInventory().subscribe((response) => {
-      let quantity = 0;
-      response.forEach((i: IIventory) => {
-        quantity += i.quantity;
-      });
-      this.numberProduct = quantity;
-    });
+  getDashboardInfo() {
+    this.dashboardService.dashboardInfo().subscribe((response) => {
+      this.dashboardInfo = response
+      this.chart = response.chart.map((v: any) => v.value)
+      this.lineChartData = [
+        {
+          data: this.chart,
+          label: 'Sales order',
+          lineTension: 0,
+        },
+      ]
+    })
   }
-  getCustomerNumber() {
-    this.customerService.getCustomers().subscribe((response) => {
-      this.numberCustomer = response.length;
-    });
+
+  editOrder(id: string | null) {
+    this.router.navigate([routes.EDIT_ORDER + id])
   }
 }
