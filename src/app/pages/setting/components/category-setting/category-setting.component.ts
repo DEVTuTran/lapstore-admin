@@ -104,7 +104,6 @@ export class CategorySettingComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.isLoading = true
       if (result?.isAdd) {
         this.settingService.updateStatusSubCategory(id, result.newData).subscribe(
           (response) => {
@@ -139,7 +138,6 @@ export class CategorySettingComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.isLoading = true
       if (result?.isAdd) {
         this.settingService.addCategory(result.newData).subscribe(
           (response) => {
@@ -211,7 +209,6 @@ export class CategorySettingComponent implements OnInit {
     })
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.isLoading = true
       if (result?.isAdd) {
         this.settingService.editCategory(id, result.newData).subscribe(
           (response) => {
