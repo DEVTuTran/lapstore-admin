@@ -213,6 +213,7 @@ export class ProductCreateComponent implements OnInit {
   getCategory() {
     this.productService.getCategories().subscribe((response) => {
       this.categories = response
+      console.log('categories', this.categories)
 
       let categoryArr = this.formDataProduct.get('category') as FormArray
 

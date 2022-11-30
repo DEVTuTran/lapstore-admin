@@ -94,7 +94,6 @@ export class OrderViewComponent implements OnInit, AfterViewInit {
         if (response.error) {
         } else {
           this.orders = response.orders.data
-          console.log('order', this.orders)
 
           this.pageIndex = Number(response.orders.pagination.page) - 1
           this.pageSize = response.orders.pagination.totalRows

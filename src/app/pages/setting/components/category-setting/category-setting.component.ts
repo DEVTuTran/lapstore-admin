@@ -1,16 +1,11 @@
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { CategoryModalComponent } from 'src/app/components/popup-modal/category-modal/category-modal.component';
-import { ConfirmModalComponent } from 'src/app/components/popup-modal/confirm-modal/confirm-modal.component';
-import { SettingService } from '../../services/setting.service';
+import { animate, state, style, transition, trigger } from '@angular/animations'
+import { Component, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import { CategoryModalComponent } from 'src/app/components/popup-modal/category-modal/category-modal.component'
+import { ConfirmModalComponent } from 'src/app/components/popup-modal/confirm-modal/confirm-modal.component'
+import { SubCategoryModalComponent } from 'src/app/components/popup-modal/subcategory-modal/subcategory-modal.component'
+import { SettingService } from '../../services/setting.service'
 
 @Component({
   selector: 'app-category-setting',
@@ -31,8 +26,8 @@ import { SettingService } from '../../services/setting.service';
   ],
 })
 export class CategorySettingComponent implements OnInit {
-  listCategories: any = [];
-  listSubCategories = [];
+  listCategories: any = []
+  listSubCategories = []
   tableColums: string[] = [
     'categoryId',
     'categoryName',
@@ -40,20 +35,21 @@ export class CategorySettingComponent implements OnInit {
     'createAt',
     'status',
     'action',
-  ];
+  ]
+  categoryId?: string
 
-  isAdd: boolean = false;
-  isDelete: boolean = false;
-  isEdit: boolean = false;
-  isConfirm: boolean = false;
-  isLoading: boolean = false;
+  isAdd: boolean = false
+  isDelete: boolean = false
+  isEdit: boolean = false
+  isConfirm: boolean = false
+  isLoading: boolean = false
 
-  photo: string = '../../../assets/icons/no-image-icon.svg';
-  addIcon: string = '../../../assets/icons/plus.svg';
-  editIcon: string = '../../../assets/icons/pencil-icon.svg';
-  deleteIcon: string = '../../../assets/icons/trash-icon-sku.svg';
-  chervonDown: string = '../../../assets/icons/chervon-down.svg';
-  chervonUp: string = '../../../assets/icons/chervon-up.svg';
+  photo: string = '../../../assets/icons/no-image-icon.svg'
+  addIcon: string = '../../../assets/icons/plus.svg'
+  editIcon: string = '../../../assets/icons/pencil-icon.svg'
+  deleteIcon: string = '../../../assets/icons/trash-icon-sku.svg'
+  chervonDown: string = '../../../assets/icons/chervon-down.svg'
+  chervonUp: string = '../../../assets/icons/chervon-up.svg'
 
   constructor(
     private settingService: SettingService,
@@ -62,9 +58,9 @@ export class CategorySettingComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isLoading = true;
-    this.getCategories();
-    this.isLoading = false;
+    this.isLoading = true
+    this.getCategories()
+    this.isLoading = false
   }
 
   getCategories() {
@@ -77,28 +73,59 @@ export class CategorySettingComponent implements OnInit {
           active: e.active,
           isExpanded: false,
           subCategory: [],
-        };
+        }
 
-        return data;
-      });
-    });
+        return data
+      })
+    })
   }
 
   getSubCategories(id: string) {
+    this.categoryId = id
     this.listCategories.find((i: any) => i._id == id).isExpanded =
-      !this.listCategories.find((i: any) => i._id == id).isExpanded;
+      !this.listCategories.find((i: any) => i._id == id).isExpanded
     if (this.listCategories.find((i: any) => i._id == id).isExpanded) {
       this.settingService.getSubCategories(id).subscribe((response) => {
-        this.listSubCategories = response;
-        this.listCategories.find((i: any) => i._id == id).subCategory =
-          response.data;
-      });
+        this.listSubCategories = response
+        this.listCategories.find((i: any) => i._id == id).subCategory = response.data
+      })
     }
-    console.log('list', this.listCategories);
   }
 
-  openEditCustomer(id: string) {}
+  openEditStatusSub(id: string, name: string) {
+    const dialogRef = this.dialog.open(CategoryModalComponent, {
+      data: {
+        title: 'Edit subcategory?',
+        message: 'Are you sure you want to edit subcategory',
+        name: name,
+        type: 'sub',
+        isAdd: this.isAdd,
+      },
+    })
 
+    dialogRef.afterClosed().subscribe((result) => {
+      this.isLoading = true
+      if (result?.isAdd) {
+        this.settingService.updateStatusSubCategory(id, result.newData).subscribe(
+          (response) => {
+            this.isLoading = false
+            this.snackBar.open('Edit subcategory success', '', {
+              duration: 3000,
+              panelClass: 'snackbar-notification__success',
+            })
+            this.getCategories()
+          },
+          (error) => {
+            this.isLoading = false
+            this.snackBar.open('Edit subcategory not success', '', {
+              duration: 3000,
+              panelClass: 'snackbar-notification__not-success',
+            })
+          }
+        )
+      }
+    })
+  }
   // add category
 
   openDialogAdd() {
@@ -109,30 +136,65 @@ export class CategorySettingComponent implements OnInit {
         type: 'add',
         isAdd: this.isAdd,
       },
-    });
+    })
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.isLoading = true;
+      this.isLoading = true
       if (result?.isAdd) {
         this.settingService.addCategory(result.newData).subscribe(
           (response) => {
-            this.isLoading = false;
+            this.isLoading = false
             this.snackBar.open('Add new category success', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__success',
-            });
-            this.getCategories();
+            })
+            this.getCategories()
           },
           (error) => {
-            this.isLoading = false;
+            this.isLoading = false
             this.snackBar.open('Add new category not success', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__not-success',
-            });
+            })
           }
-        );
+        )
       }
-    });
+    })
+  }
+
+  // add new subcategorys
+  openDialogAddSub() {
+    const dialogRef = this.dialog.open(SubCategoryModalComponent, {
+      data: {
+        title: 'Add new subcategory?',
+        message: 'Are you sure you want to add new subcategory',
+        type: 'add',
+        category: this.categoryId,
+        isAdd: this.isAdd,
+      },
+    })
+    dialogRef.afterClosed().subscribe((result) => {
+      this.isLoading = true
+      if (result?.isAdd) {
+        this.settingService.addSubCategory(result.newData).subscribe(
+          (response) => {
+            this.isLoading = false
+            this.snackBar.open('Add new subcategory success', '', {
+              duration: 3000,
+              panelClass: 'snackbar-notification__success',
+            })
+            this.getCategories()
+          },
+          (error) => {
+            this.isLoading = false
+            this.snackBar.open('Add new subcategory not success', '', {
+              duration: 3000,
+              panelClass: 'snackbar-notification__not-success',
+            })
+          }
+        )
+      }
+    })
   }
 
   // edit category
@@ -146,30 +208,30 @@ export class CategorySettingComponent implements OnInit {
         type: 'edit',
         isAdd: this.isAdd,
       },
-    });
+    })
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.isLoading = true;
+      this.isLoading = true
       if (result?.isAdd) {
         this.settingService.editCategory(id, result.newData).subscribe(
           (response) => {
-            this.isLoading = false;
+            this.isLoading = false
             this.snackBar.open('Edit category success', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__success',
-            });
-            this.getCategories();
+            })
+            this.getCategories()
           },
           (error) => {
-            this.isLoading = false;
+            this.isLoading = false
             this.snackBar.open('Edit category not success', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__not-success',
-            });
+            })
           }
-        );
+        )
       }
-    });
+    })
   }
 
   // change status
@@ -184,33 +246,70 @@ export class CategorySettingComponent implements OnInit {
         type: 'category',
         isConfirm: this.isConfirm,
       },
-    });
+    })
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log(result);
-
         const data = {
           active: !active,
-        };
-        this.isLoading = true;
+        }
+        this.isLoading = true
         this.settingService.editStatusCategory(id, data).subscribe(
           (response) => {
-            this.isLoading = false;
+            this.isLoading = false
             this.snackBar.open('Change status for category success', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__success',
-            });
-            this.getCategories();
+            })
+            this.getCategories()
           },
           (error) => {
-            this.isLoading = false;
+            this.isLoading = false
             this.snackBar.open('Change status for category not success', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__not-success',
-            });
+            })
           }
-        );
+        )
       }
-    });
+    })
+  }
+
+  // change subcategory status
+
+  openDialogSubConfirm(id: string, active: number) {
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {
+      data: {
+        title: 'Change status for subcategory?',
+        message: 'Are you sure you want to change status for category',
+        active: active,
+        type: 'category',
+        isConfirm: this.isConfirm,
+      },
+    })
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        const data = {
+          active: !active,
+        }
+        this.isLoading = true
+        this.settingService.updateStatusSubCategory(id, data).subscribe(
+          (response) => {
+            this.isLoading = false
+            this.snackBar.open('Change status for subcategory success', '', {
+              duration: 3000,
+              panelClass: 'snackbar-notification__success',
+            })
+            this.getCategories()
+          },
+          (error) => {
+            this.isLoading = false
+            this.snackBar.open('Change status for subcategory not success', '', {
+              duration: 3000,
+              panelClass: 'snackbar-notification__not-success',
+            })
+          }
+        )
+      }
+    })
   }
 }

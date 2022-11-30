@@ -25,6 +25,7 @@ import { EditModalComponent } from './edit-modal/edit-modal.component'
 import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component'
 import { CategoryModalComponent } from './category-modal/category-modal.component'
 import { EditOrderComponent } from './edit-order-status/edit-order.component'
+import { SubCategoryModalComponent } from './subcategory-modal/subcategory-modal.component'
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { EditOrderComponent } from './edit-order-status/edit-order.component'
     ConfirmModalComponent,
     CategoryModalComponent,
     EditOrderComponent,
+    SubCategoryModalComponent,
   ],
   imports: [
     SharedModule,

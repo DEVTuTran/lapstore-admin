@@ -106,15 +106,14 @@
                 <div class="status">
                   <span
                     (click)="
-                      openDialogConfirm(
-                        element._id,
-                        element.active,
-                        element.brandName
+                      openDialogSubConfirm(
+                        sub._id,
+                        sub.active
                       )
                     "
                   >
                     <mat-slide-toggle
-                      [checked]="element.active == 1"
+                      [checked]="sub.active == 1"
                     ></mat-slide-toggle
                   ></span>
                   <span
@@ -132,13 +131,17 @@
                       mat-icon-button
                       class="edit-action"
                       type="button"
-                      (click)="openEditCustomer(element._id)"
+                      (click)="openEditStatusSub(sub._id,sub.subCategoryName)"
                     >
                       <img [src]="editIcon" />
                     </button>
                   </div>
                 </div>
               </div>
+              <button mat-button (click)="openDialogAddSub()">
+                <img [src]="addIcon" />
+                Add new subcategory
+              </button>
             </div>
           </div>
         </td>

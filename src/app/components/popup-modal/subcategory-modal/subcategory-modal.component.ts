@@ -5,7 +5,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 export interface DialogData {
   title: string
   name: string
-  thumbnail: string
+  category: string
   message: string
   isAdd: boolean
   isEdit: boolean
@@ -13,15 +13,14 @@ export interface DialogData {
 }
 
 @Component({
-  selector: 'app-category-modal',
-  templateUrl: './category-modal.component.html',
-  styleUrls: ['./category-modal.component.scss'],
+  selector: 'app-subcategory-modal',
+  templateUrl: './subcategory-modal.component.html',
+  styleUrls: ['./subcategory-modal.component.scss'],
 })
-export class CategoryModalComponent implements OnInit {
+export class SubCategoryModalComponent implements OnInit {
   public categoryForm!: FormGroup
-
   constructor(
-    public dialogRef: MatDialogRef<CategoryModalComponent>,
+    public dialogRef: MatDialogRef<SubCategoryModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {}
 
@@ -32,16 +31,9 @@ export class CategoryModalComponent implements OnInit {
   onClick() {
     this.data.isAdd = true
     this.data.name = this.categoryForm.value.name
-    this.data.thumbnail = this.categoryForm.value.thumbnail
-    let newData = null
-    if (this.data.type === 'sub') {
-      newData = {
-        subCategoryName: this.data.name,
-      }
-    } else {
-      newData = {
-        categoryName: this.data.name,
-      }
+    const newData = {
+      subCategoryName: this.data.name,
+      category: this.data.category,
     }
     this.dialogRef.close({ newData, isAdd: this.data.isAdd })
   }
@@ -50,8 +42,9 @@ export class CategoryModalComponent implements OnInit {
     this.categoryForm = new FormGroup({
       name: new FormControl(this.data.name, [
         Validators.required,
-        Validators.minLength(1),
+        Validators.minLength(5),
       ]),
+      category: new FormControl(this.data.category, [Validators.required]),
     })
   }
 }
