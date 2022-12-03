@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 export const environment = {
   production: false,
-  api_url: 'http://localhost:5555/api/',
+  api_url: 'https://shop-tutran.site/backend/',
   province_api: 'https://provinces.open-api.vn/api/?depth=3',
   firebase: {
     apiKey: 'AIzaSyB-nck035aktj_6EUlqYIOhL7uuwBAWOx0',
