@@ -58,6 +58,19 @@ export class ProductEditComponent implements OnInit {
 
   hideButton = false
 
+  rams: string[] = ['8GB', '16GB', '32GB']
+  cpus: string[] = [
+    'M1',
+    'M2',
+    'Core I3',
+    'Core I5',
+    'Core I7',
+    'Ryzen 3',
+    'Ryzen 5',
+    'Ryzen 7',
+  ]
+  screens: string[] = ['13.3', '13.6', '14', '16']
+
   constructor(
     private productService: ProductService,
     private fileUploadService: FileUploadService,
@@ -99,6 +112,9 @@ export class ProductEditComponent implements OnInit {
       productThumbnail: new FormControl(this.productInfor.productThumbnail, [
         Validators.required,
       ]),
+      ram: new FormControl(this.productInfor.ram, [Validators.required]),
+      cpu: new FormControl(this.productInfor.cpu, [Validators.required]),
+      screen: new FormControl(this.productInfor.screen, [Validators.required]),
       specs: new FormArray([this.createFormArray()]),
       rating: new FormControl(this.productInfor.rating),
       subCategory: new FormArray([this.createSubCategoryArray()]),
@@ -266,6 +282,15 @@ export class ProductEditComponent implements OnInit {
     this.isLoading = false
   }
 
+  selectRam(data: any) {
+    this.productInfor.ram = data.value
+  }
+  selectCpu(data: any) {
+    this.productInfor.cpu = data.value
+  }
+  selectScreen(data: any) {
+    this.productInfor.screen = data.value
+  }
   // select category
   selectCategory(data: any) {
     this.categoryId = data.value

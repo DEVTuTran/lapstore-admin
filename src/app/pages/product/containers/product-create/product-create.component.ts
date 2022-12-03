@@ -47,6 +47,9 @@ export class ProductCreateComponent implements OnInit {
 
   hideButton = false
 
+  ram: String = '8GB'
+  cpu: String = 'Core I3'
+  screen: String = '13.3'
   detailsProduct = [
     {
       key: 'Part-number',
@@ -122,6 +125,19 @@ export class ProductCreateComponent implements OnInit {
     },
   ]
 
+  rams: string[] = ['8GB', '16GB', '32GB']
+  cpus: string[] = [
+    'M1',
+    'M2',
+    'Core I3',
+    'Core I5',
+    'Core I7',
+    'Ryzen 3',
+    'Ryzen 5',
+    'Ryzen 7',
+  ]
+  screens: string[] = ['13.3', '13.6', '14', '16']
+
   constructor(
     private snackBar: MatSnackBar,
     private productService: ProductService,
@@ -146,6 +162,9 @@ export class ProductCreateComponent implements OnInit {
         Validators.required,
         Validators.min(1000000),
       ]),
+      ram: new FormControl(this.ram, [Validators.required]),
+      cpu: new FormControl(this.cpu, [Validators.required]),
+      screen: new FormControl(this.screen, [Validators.required]),
       rating: new FormControl(0),
       discount: new FormControl(0, [Validators.required, Validators.min(0)]),
       subCategory: new FormArray([this.createSubCategoryArray()]),
@@ -257,6 +276,15 @@ export class ProductCreateComponent implements OnInit {
     })
   }
 
+  selectRam(data: any) {
+    this.ram = data.value
+  }
+  selectCpu(data: any) {
+    this.cpu = data.value
+  }
+  selectScreen(data: any) {
+    this.screen = data.value
+  }
   selectBrands(data: any) {
     this.brandId = data.value
   }
@@ -295,7 +323,7 @@ export class ProductCreateComponent implements OnInit {
     })
   }
 
-  // upload image with firebase
+  // upload image
 
   uploadImage(event: any) {
     this.isLoading = true
@@ -352,6 +380,8 @@ export class ProductCreateComponent implements OnInit {
       category: category,
       subCategory: subCategory,
     }
+    console.log(data)
+
     if (this.formDataProduct.valid) {
       this.productService.createProduct(data).subscribe(
         (data) => {

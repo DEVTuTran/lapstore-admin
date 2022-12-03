@@ -82,6 +82,39 @@
               </div>
             </div>
             <div class="row-item">
+              <div class="row-item__field feild-info">
+                <p class="label">Ram</p>
+                <mat-form-field appearance="outline" class="field-input">
+                  <mat-select placeholder="RAM" formControlName="ram" (selectionChange)="selectRam($event)">
+                    <mat-option *ngFor="let ram of rams" [value]="ram">
+                      {{ ram }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="row-item__field feild-info">
+                <p class="label">CPU</p>
+                <mat-form-field appearance="outline" class="field-input">
+                  <mat-select placeholder="CPU" formControlName="cpu" (selectionChange)="selectCpu($event)">
+                    <mat-option *ngFor="let cpu of cpus" [value]="cpu">
+                      {{ cpu }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="row-item__field feild-info">
+                <p class="label">Screen size</p>
+                <mat-form-field appearance="outline" class="field-input">
+                  <mat-select placeholder="Screen" formControlName="screen" (selectionChange)="selectScreen($event)">
+                    <mat-option *ngFor="let screen of screens" [value]="screen">
+                      {{ screen }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            
+            <div class="row-item">
               <div
                 formArrayName="category"
                 class="row-item__field"
