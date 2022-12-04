@@ -3,23 +3,41 @@
 
 .not-found-page {
     height: 100vh;
-    &__content {
-        &-left {
-        }
-        &-right {
-        }
-    }
+    display: flex;
+    align-items: center;
     &__card {
         box-shadow: none;
         align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        .avatar-image{
+            width: 250px;
+            height: 250px;
+        }
         &-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
             &-title {
-                font-family: 700;
+                margin-top: 20px !important;
+                font-weight: 700;
+                font-size: 40px;
             }
             &-sub-title {
+                font-size: 25px;
+                font-weight: 500;
+                margin-top: 10px;
+                margin-bottom: 30px;
             }
             &-link {
+                padding: 10px;
+                border: 1px solid;
+                border-radius: 5px;
                 cursor: pointer;
+                width: 200px;
             }
         }
     }
