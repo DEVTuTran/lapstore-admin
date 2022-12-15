@@ -9,9 +9,9 @@
       routerLink="/dashboard"
     />
     <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
-    <span class="link-item" routerLink="/inventory">Inventory</span>
+    <span class="link-item" routerLink="/inventory">Kho hàng</span>
     <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
-    <span>Detail</span>
+    <span>Thông tin</span>
     <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
     <span>{{ inventoryDetail && inventoryDetail.productName }}</span>
   </div>
@@ -20,23 +20,23 @@
   <mat-card class="inventory-infor__content">
     <div class="inventory-infor__content-head">
       <p class="field-value">
-        Inventory ID :
+        ID Kho hàng :
         <span class="value">{{ inventoryDetail && inventoryDetail._id }}</span>
       </p>
       <p class="field-value">
-        Product name :
+        Tên sản phẩm :
         <span class="value">{{
           inventoryDetail && inventoryDetail.productName
         }}</span>
       </p>
       <p class="field-value">
-        Quantity :
+        Số lượng :
         <span class="quantity">{{
           inventoryDetail && inventoryDetail.quantity
         }}</span>
       </p>
       <p class="field-value">
-        Create at :
+        Ngày tạo :
         <span class="value">{{
           inventoryDetail && inventoryDetail.createdAt
             | date: "dd MMM yyyy hh:mm"
@@ -52,19 +52,19 @@
       >
         <!-- Name Column -->
         <ng-container matColumnDef="userName">
-          <th mat-header-cell *matHeaderCellDef>User ID</th>
+          <th mat-header-cell *matHeaderCellDef>ID Ngươi dùng</th>
           <td mat-cell *matCellDef="let element">{{ element.userId }}</td>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="quantity">
-          <th mat-header-cell *matHeaderCellDef>Quantity</th>
+          <th mat-header-cell *matHeaderCellDef>Số lượng</th>
           <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
           <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
