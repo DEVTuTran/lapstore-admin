@@ -3,7 +3,7 @@
 <mat-card-content class="information-content">
   <mat-card class="information-content__wrapper">
     <mat-card-title class="information-content__wrapper-title">
-      <p class="title">User Detail</p>
+      <p class="title">Thông tin cá nhân</p>
     </mat-card-title>
     <div class="information-content__wrapper-content">
       <div class="upload-image">
@@ -22,7 +22,7 @@
       >
         <div class="row-item">
           <div class="row-item__field">
-            <p class="label">Username</p>
+            <p class="label">Tên</p>
             <mat-form-field appearance="outline" class="field-input">
               <input
                 matInput
@@ -46,7 +46,7 @@
         </div>
         <div class="row-item">
           <div class="row-item__field">
-            <p class="label">Date Of Birth</p>
+            <p class="label">Ngày sinh</p>
             <mat-form-field appearance="outline" class="field-input">
               <input
                 matInput
@@ -62,14 +62,14 @@
             </mat-form-field>
           </div>
           <div class="row-item__field">
-            <p class="label">Phone Number</p>
+            <p class="label">Số điện thoại</p>
             <mat-form-field
               appearance="outline"
               class="field-input select-field"
             >
               <input
                 matInput
-                placeholder="Phone number"
+                placeholder="Số điện thoại"
                 type="text"
                 formControlName="phoneNumber"
               />
@@ -78,7 +78,7 @@
         </div>
         <div class="row-item">
           <div class="row-item__field-address">
-            <p class="label">Location</p>
+            <p class="label">Địa chỉ</p>
             <div class="field-input">
               <mat-form-field appearance="outline" class="row-item__field-sub">
                 <mat-select
@@ -124,11 +124,11 @@
         </div>
         <div class="row-item">
           <div class="row-item__field-full">
-            <p class="label">Address</p>
+            <p class="label">Số nhà, đường</p>
             <mat-form-field appearance="outline" class="field-input">
               <input
                 matInput
-                placeholder="Address"
+                placeholder="Nhập số nhà, đường..."
                 type="text"
                 formControlName="address"
               />
@@ -145,7 +145,7 @@
       class="btn-action btn-save"
       (click)="onEdit()"
     >
-      Save
+      Lưu
     </button>
     <button
       mat-stroked-button
@@ -153,7 +153,7 @@
       type="reset"
       class="btn-action btn-cancel"
     >
-      Cancel
+      Hủy
     </button>
   </div>
 </mat-card-content>

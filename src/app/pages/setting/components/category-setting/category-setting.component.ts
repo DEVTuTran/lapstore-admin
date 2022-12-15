@@ -95,8 +95,8 @@ export class CategorySettingComponent implements OnInit {
   openEditStatusSub(id: string, name: string) {
     const dialogRef = this.dialog.open(CategoryModalComponent, {
       data: {
-        title: 'Edit subcategory?',
-        message: 'Are you sure you want to edit subcategory',
+        title: 'Cập nhật thông tin danh mục con',
+        message: 'Bạn chắc chắn muốn cập nhật thông tin danh mục này?',
         name: name,
         type: 'sub',
         isAdd: this.isAdd,
@@ -108,7 +108,7 @@ export class CategorySettingComponent implements OnInit {
         this.settingService.updateStatusSubCategory(id, result.newData).subscribe(
           (response) => {
             this.isLoading = false
-            this.snackBar.open('Edit subcategory success', '', {
+            this.snackBar.open('Cập nhật thông tin danh mục con thành công', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__success',
             })
@@ -116,10 +116,14 @@ export class CategorySettingComponent implements OnInit {
           },
           (error) => {
             this.isLoading = false
-            this.snackBar.open('Edit subcategory not success', '', {
-              duration: 3000,
-              panelClass: 'snackbar-notification__not-success',
-            })
+            this.snackBar.open(
+              'Cập nhật thông tin danh mục con không thành công',
+              '',
+              {
+                duration: 3000,
+                panelClass: 'snackbar-notification__not-success',
+              }
+            )
           }
         )
       }
@@ -130,8 +134,8 @@ export class CategorySettingComponent implements OnInit {
   openDialogAdd() {
     const dialogRef = this.dialog.open(CategoryModalComponent, {
       data: {
-        title: 'Add new category?',
-        message: 'Are you sure you want to add new category',
+        title: 'Thêm mới danh mục?',
+        message: 'Bạn chắc chắn muốn thêm mới danh mục?',
         type: 'add',
         isAdd: this.isAdd,
       },
@@ -142,7 +146,7 @@ export class CategorySettingComponent implements OnInit {
         this.settingService.addCategory(result.newData).subscribe(
           (response) => {
             this.isLoading = false
-            this.snackBar.open('Add new category success', '', {
+            this.snackBar.open('Thêm mới danh mục thành công', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__success',
             })
@@ -150,7 +154,7 @@ export class CategorySettingComponent implements OnInit {
           },
           (error) => {
             this.isLoading = false
-            this.snackBar.open('Add new category not success', '', {
+            this.snackBar.open('Thêm mới danh mục không thành công', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__not-success',
             })
@@ -164,20 +168,19 @@ export class CategorySettingComponent implements OnInit {
   openDialogAddSub() {
     const dialogRef = this.dialog.open(SubCategoryModalComponent, {
       data: {
-        title: 'Add new subcategory?',
-        message: 'Are you sure you want to add new subcategory',
+        title: 'Thêm mới danh mục con',
+        message: 'Bạn chắc chắn muốn thêm mới danh mục con?',
         type: 'add',
         category: this.categoryId,
         isAdd: this.isAdd,
       },
     })
     dialogRef.afterClosed().subscribe((result) => {
-      this.isLoading = true
       if (result?.isAdd) {
         this.settingService.addSubCategory(result.newData).subscribe(
           (response) => {
             this.isLoading = false
-            this.snackBar.open('Add new subcategory success', '', {
+            this.snackBar.open('Thêm mới danh mục con thành công', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__success',
             })
@@ -185,7 +188,7 @@ export class CategorySettingComponent implements OnInit {
           },
           (error) => {
             this.isLoading = false
-            this.snackBar.open('Add new subcategory not success', '', {
+            this.snackBar.open('Thêm mới danh mục con không thành công', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__not-success',
             })
@@ -200,8 +203,8 @@ export class CategorySettingComponent implements OnInit {
   openDialogEdit(id: string, name: string) {
     const dialogRef = this.dialog.open(CategoryModalComponent, {
       data: {
-        title: 'Edit category?',
-        message: 'Are you sure you want to edit category',
+        title: 'Cập nhật thông tin danh mục?',
+        message: 'Bạn chắc chắn muốn cập nhật thông tin danh mục này',
         name: name,
         type: 'edit',
         isAdd: this.isAdd,
@@ -213,7 +216,7 @@ export class CategorySettingComponent implements OnInit {
         this.settingService.editCategory(id, result.newData).subscribe(
           (response) => {
             this.isLoading = false
-            this.snackBar.open('Edit category success', '', {
+            this.snackBar.open('Cập nhật thông tin danh mục thành công', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__success',
             })
@@ -221,7 +224,7 @@ export class CategorySettingComponent implements OnInit {
           },
           (error) => {
             this.isLoading = false
-            this.snackBar.open('Edit category not success', '', {
+            this.snackBar.open('Cập nhật thông tin danh mục không thành công', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__not-success',
             })
@@ -236,8 +239,8 @@ export class CategorySettingComponent implements OnInit {
   openDialogConfirm(id: string, active: number, name: string) {
     const dialogRef = this.dialog.open(ConfirmModalComponent, {
       data: {
-        title: 'Change status for category?',
-        message: 'Are you sure you want to change status for category',
+        title: 'Cập nhật trạng thái danh mục',
+        message: 'Bạn chắc chắn muốn cập nhật trạng thái cho danh mục này',
         active: active,
         name: name,
         type: 'category',
@@ -249,11 +252,10 @@ export class CategorySettingComponent implements OnInit {
         const data = {
           active: !active,
         }
-        this.isLoading = true
         this.settingService.editStatusCategory(id, data).subscribe(
           (response) => {
             this.isLoading = false
-            this.snackBar.open('Change status for category success', '', {
+            this.snackBar.open('Cập nhật trạng thái thành công', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__success',
             })
@@ -261,7 +263,7 @@ export class CategorySettingComponent implements OnInit {
           },
           (error) => {
             this.isLoading = false
-            this.snackBar.open('Change status for category not success', '', {
+            this.snackBar.open('Cập nhật trạng thái không thành công', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__not-success',
             })
@@ -276,8 +278,8 @@ export class CategorySettingComponent implements OnInit {
   openDialogSubConfirm(id: string, active: number) {
     const dialogRef = this.dialog.open(ConfirmModalComponent, {
       data: {
-        title: 'Change status for subcategory?',
-        message: 'Are you sure you want to change status for category',
+        title: 'Cập nhật trạng thái danh mục con',
+        message: 'Bạn chắc chắn muốn cập nhật trạng thái cho danh mục con này?',
         active: active,
         type: 'category',
         isConfirm: this.isConfirm,
@@ -288,11 +290,10 @@ export class CategorySettingComponent implements OnInit {
         const data = {
           active: !active,
         }
-        this.isLoading = true
         this.settingService.updateStatusSubCategory(id, data).subscribe(
           (response) => {
             this.isLoading = false
-            this.snackBar.open('Change status for subcategory success', '', {
+            this.snackBar.open('Cập nhật trạng thái thành công', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__success',
             })
@@ -300,7 +301,7 @@ export class CategorySettingComponent implements OnInit {
           },
           (error) => {
             this.isLoading = false
-            this.snackBar.open('Change status for subcategory not success', '', {
+            this.snackBar.open('Cập nhật trạng thái không thành công', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__not-success',
             })

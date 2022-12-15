@@ -8,17 +8,17 @@
         routerLink="/customers"
       />
       <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
-      <span class="link-item" routerLink="/settings">Settings</span>
+      <span class="link-item" routerLink="/settings">Cài đặt</span>
     </div>
   </mat-toolbar>
   <mat-tab-group class="setting-content">
-    <mat-tab label="Edit information">
+    <mat-tab label="Thông tin cá nhân">
       <app-information-setting></app-information-setting>
     </mat-tab>
-    <mat-tab label="Brand settings">
+    <mat-tab label="Quản lý thương hiệu">
       <app-brand-setting></app-brand-setting>
     </mat-tab>
-    <mat-tab label="Category settings">
+    <mat-tab label="Quản lý danh mục">
       <app-category-setting></app-category-setting>
     </mat-tab>
   </mat-tab-group>

@@ -35,12 +35,12 @@
         formControlName="name"
       />
       <mat-error *ngIf="!categoryForm.get('quantity')?.errors?.['required']">
-        Subategory name is more than 1 characters!
+        Tên danh mục con phải dài hơn 1 ký tự!
       </mat-error>
       <mat-error
         *ngIf="categoryForm.get('quantity')?.invalid && (categoryForm.get('quantity')?.dirty || categoryForm.get('quantity')?.touched) && categoryForm.get('quantity')?.errors?.['required']"
       >
-        Subategory name is required
+        Tên danh mục con là bắt buộc
       </mat-error>
     </mat-form-field>
   </form>
@@ -51,7 +51,7 @@
       class="btn-action btn-cancel"
       type="button"
     >
-      Cancel
+      Hủy
     </button>
     <button
       mat-button
@@ -61,7 +61,7 @@
       type="button"
       class="btn-action btn-edit"
     >
-      {{ data.type == "add" ? "Add" : "Edit" }}
+      {{ data.type == "add" ? "Thêm" : "Sửa" }}
     </button>
   </div>
 </div>

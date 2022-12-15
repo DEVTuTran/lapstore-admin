@@ -10,27 +10,27 @@
         routerLink="/dashboard"
       />
       <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
-      <span class="link-item" routerLink="/dashboard">Dashboard</span>
+      <span class="link-item" routerLink="/dashboard">Trang chủ</span>
     </div>
   </mat-toolbar>
   <mat-card-content class="dashboard-content">
     <div class="dashboard-content__head">
-      <h2 class="title">Metrics</h2>
+      <h2 class="title">Thống kê</h2>
       <div class="content">
         <mat-card class="infor-item">
-          <p class="label">Sales</p>
+          <p class="label">Doanh thu</p>
           <p class="value">{{ formatVND(dashboardInfo?.sales)}}</p>
         </mat-card>
         <mat-card class="infor-item">
-          <p class="label">Customers</p>
+          <p class="label">Người dùng</p>
           <p class="value">{{ dashboardInfo?.customer }}</p>
         </mat-card>
         <mat-card class="infor-item">
-          <p class="label">Orders</p>
+          <p class="label">Đơn hàng</p>
           <p class="value">{{dashboardInfo?.orders}}</p>
         </mat-card>
         <mat-card class="infor-item">
-          <p class="label">Products</p>
+          <p class="label">Sản phẩm</p>
           <p class="value">{{ dashboardInfo?.product }}</p>
         </mat-card>
       </div>
@@ -40,7 +40,7 @@
         <app-line-chart [lineChartData]="lineChartData"></app-line-chart>
       </div>
       <div class="announcements">
-        <h2 class="title">Announcements</h2>
+        <h2 class="title">Thông báo</h2>
         <div *ngFor="let item of dashboardInfo?.notification">
           <div class="notification-item">
             <p>{{item.message}} <span (click)="editOrder(item.idToReview)" class="link">{{item.idToReview}}</span></p>

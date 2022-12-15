@@ -20,12 +20,12 @@
           </mat-option>
         </mat-select>
       <mat-error *ngIf="!order.get('quantity')?.errors?.['required']">
-        Status is more than 1!
+        Trạng thái phải lớn hơn 1!
       </mat-error>
       <mat-error
         *ngIf="order.get('quantity')?.invalid && (order.get('quantity')?.dirty || order.get('quantity')?.touched) && order.get('quantity')?.errors?.['required']"
       >
-        Status is required
+        Trạng thái là bắt buộc
       </mat-error>
     </mat-form-field>
   </form>
@@ -36,7 +36,7 @@
       class="btn-action btn-cancel"
       type="button"
     >
-      Cancel
+      Hủy
     </button>
     <button
       mat-button
@@ -46,7 +46,7 @@
       type="button"
       class="btn-action btn-edit"
     >
-      Change
+      Thêm
     </button>
   </div>
 </div>

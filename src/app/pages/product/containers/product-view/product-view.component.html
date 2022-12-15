@@ -8,16 +8,16 @@
       routerLink="/dashboard"
     />
     <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
-    <span class="link-item" routerLink="/products">Products</span>
+    <span class="link-item" routerLink="/products">Sản phẩm</span>
     <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
-    <span>Lists</span>
+    <span>Danh sách</span>
   </div>
 </mat-toolbar>
 <mat-card-content class="product-content">
   <div class="product-content__action">
     <input
       matInput
-      placeholder="Search"
+      placeholder="Tìm kiếm ..."
       type="text"
       class="search-input"
       (keyup)="onSearch($event)"
@@ -29,7 +29,7 @@
       class="create-product"
       (click)="createProduct()"
     >
-      Create product
+      Thêm sản phẩm
     </button>
   </div>
   <table mat-table [dataSource]="products" class="product-content__table">
@@ -46,7 +46,7 @@
     </ng-container>
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <th mat-header-cell *matHeaderCellDef>Tên sản phẩm</th>
       <td
         mat-cell
         *matCellDef="let element"
@@ -58,36 +58,36 @@
     </ng-container>
 
     <ng-container matColumnDef="price">
-      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <th mat-header-cell *matHeaderCellDef>Giá</th>
       <td mat-cell *matCellDef="let element">{{ formatVND(element.price) }}</td>
     </ng-container>
 
     <ng-container matColumnDef="discount">
-      <th mat-header-cell *matHeaderCellDef>Discount</th>
+      <th mat-header-cell *matHeaderCellDef>Giảm giá</th>
       <td mat-cell *matCellDef="let element">{{ element.discount }}%</td>
     </ng-container>
 
     <ng-container matColumnDef="status">
-      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
       <td mat-cell *matCellDef="let element">
         <span *ngIf="element.status == 1; else status" class="in-stock"
-          >In stock</span
+          >Đã thêm vào kho</span
         >
         <ng-template #status>
-          <span class="out-of-stock">Out of stock</span>
+          <span class="out-of-stock">Chưa thêm vào kho</span>
         </ng-template>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="createAt">
-      <th mat-header-cell *matHeaderCellDef>Create At</th>
+      <th mat-header-cell *matHeaderCellDef>Ngày tạo sản phẩm</th>
       <td mat-cell *matCellDef="let element">
         {{ element.createdAt | date: "dd MMM yyyy" }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <th mat-header-cell *matHeaderCellDef>Hành động</th>
       <td mat-cell *matCellDef="let element">
         <div class="list-actions">
           <button

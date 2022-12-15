@@ -3,25 +3,25 @@
     <div class="toolbar-link">
         <img class="icon-image link-item" [src]="homeIcon" alt="home" routerLink="/dashboard" />
         <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
-        <span class="link-item" routerLink="/orders">Orders</span>
+        <span class="link-item" routerLink="/orders">Đơn hàng</span>
         <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
-        <span>Lists</span>
+        <span>Danh sách</span>
     </div>
 </mat-toolbar>
     <mat-card-content class="product-content">
 <div class="product-content__action">
-    <input matInput placeholder="Search by product ID" type="text" class="search-input" (keyup)="onSearch($event)" />
+    <input matInput placeholder="Tìm kiếm bằng ID sản phẩm..." type="text" class="search-input" (keyup)="onSearch($event)" />
     </div>
   <table mat-table [dataSource]="orders" class="product-content__table">
     <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>Order ID</th>
+        <th mat-header-cell *matHeaderCellDef>ID đơn hàng</th>
       <td mat-cell *matCellDef="let element">
         <span class="element-name">{{ element._id }}</span>
     </td>
     </ng-container>
     
     <ng-container matColumnDef="product" >
-        <th mat-header-cell *matHeaderCellDef class="product-column">Product</th>
+        <th mat-header-cell *matHeaderCellDef class="product-column">Sản phẩm</th>
         <td mat-cell *matCellDef="let element" class="product-column element-name" [routerLink]="['/orders/detail/' + element._id]">
             <div
                 *ngFor="let product of element.products"
@@ -35,7 +35,7 @@
     </ng-container>
     
     <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef>Price</th>
+        <th mat-header-cell *matHeaderCellDef>Giá</th>
         <td mat-cell *matCellDef="let element">
             {{formatPrice(element.products)}}
         </td>
@@ -49,7 +49,7 @@
     </ng-container> -->
     
     <ng-container matColumnDef="status">
-        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
         <td mat-cell *matCellDef="let element">
             <span [ngClass]="element.status===1?'waiting':element.status===2?'delivering':element.status===3?'delivered':'cancel'">
                 {{element.status===0?'Chờ lấy hàng':element.status===1?'Đang giao hàng':element.status===2?'Đã giao hàng':'Đã hủy'}}
@@ -58,19 +58,19 @@
         </td>
     </ng-container>
     <ng-container matColumnDef="userId">
-        <th mat-header-cell *matHeaderCellDef>User ID</th>
+        <th mat-header-cell *matHeaderCellDef>ID người dùng</th>
         <td mat-cell *matCellDef="let element">{{ element.userId }}</td>
     </ng-container>
     
     <ng-container matColumnDef="createAt">
-        <th mat-header-cell *matHeaderCellDef>Create At</th>
+        <th mat-header-cell *matHeaderCellDef>Này tạo</th>
         <td mat-cell *matCellDef="let element">
             {{ element.createdAt| date: "dd MMM yyyy" }}
         </td>
     </ng-container>
     
     <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <th mat-header-cell *matHeaderCellDef>Hành động</th>
         <td mat-cell *matCellDef="let element">
             <div class="list-actions">
                 <button mat-icon-button class="edit-action" type="button" (click)="editOrder(element._id)">

@@ -81,7 +81,7 @@ export class EditBrandComponent implements OnInit {
             })
           },
           (error) => {
-            this.snackBar.open('Create product not success', '', {
+            this.snackBar.open('Thêm thương hiệu không thành công', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__not-success',
             })

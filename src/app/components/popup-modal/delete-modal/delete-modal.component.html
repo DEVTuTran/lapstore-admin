@@ -29,21 +29,21 @@
     class="delete-modal__content"
     *ngIf="data.type == 'inventory'"
   >
-    Would you like to delete
-    <span class="name">{{ data.name }} </span>from inventory?
+    Bạn muốn xóa
+    <span class="name">{{ data.name }} </span>khỏi kho?
   </div>
   <div
     mat-dialog-content
     class="delete-modal__content"
     *ngIf="data.type == 'product'"
   >
-    Would you like to delete
+    Bạn muốn xóa
     <span class="name">{{ data.name }} </span>?
   </div>
   <p *ngIf="data.message" class="message">{{ data.message }}</p>
   <div mat-dialog-actions class="delete-modal__action">
     <button mat-button (click)="onNoClick()" class="btn-action btn-cancel">
-      Cancel
+      Hủy
     </button>
     <button
       mat-button
@@ -52,7 +52,7 @@
       (click)="onClick()"
       class="btn-action btn-delete"
     >
-      Delete
+      Xóa
     </button>
   </div>
 </div>

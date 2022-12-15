@@ -31,17 +31,17 @@
     <mat-form-field appearance="outline" class="field-quantity">
       <input
         matInput
-        placeholder="Enter brand name"
+        placeholder="Nhập tên thương hiệu"
         type="text"
         formControlName="name"
       />
       <mat-error *ngIf="!brandForm.get('quantity')?.errors?.['required']">
-        Brand name is more than 1 characters!
+        Tên thương hiệu phải dài hơn 1 ký tự!
       </mat-error>
       <mat-error
         *ngIf="brandForm.get('quantity')?.invalid && (brandForm.get('quantity')?.dirty || brandForm.get('quantity')?.touched) && brandForm.get('quantity')?.errors?.['required']"
       >
-        Brand name is required
+        Tên thương hiệu là bắt buộc
       </mat-error>
     </mat-form-field>
   </form>
@@ -52,7 +52,7 @@
       class="btn-action btn-cancel"
       type="button"
     >
-      Cancel
+      Hủy
     </button>
     <button
       mat-button
@@ -62,7 +62,7 @@
       type="button"
       class="btn-action btn-edit"
     >
-      {{ data.type == "add" ? "Add" : "Edit" }}
+      {{ data.type == "add" ? "Thêm" : "Sửa" }}
     </button>
   </div>
 </div>

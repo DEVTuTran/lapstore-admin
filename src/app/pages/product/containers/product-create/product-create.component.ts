@@ -228,14 +228,10 @@ export class ProductCreateComponent implements OnInit {
   }
 
   // Category select
-
   getCategory() {
     this.productService.getCategories().subscribe((response) => {
       this.categories = response
-      console.log('categories', this.categories)
-
       let categoryArr = this.formDataProduct.get('category') as FormArray
-
       const newcategories = this.categories.map((i: any) => {
         this.getSubCategory(i._id)
         const data = {
@@ -253,9 +249,10 @@ export class ProductCreateComponent implements OnInit {
   // SubCategory select
 
   getSubCategory(id: string) {
-    this.productService.getSubCategoriesByCT(id).subscribe((response) => {
+    this.productService.getSubCategoriesByCT(id).then((response: any) => {
       this.subCategories = response.data
       this.arraySubcategory.push(this.subCategories)
+
       let subCategoryArr = this.formDataProduct.get('subCategory') as FormArray
 
       const newsubcategories = {

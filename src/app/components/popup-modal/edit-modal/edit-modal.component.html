@@ -3,12 +3,12 @@
     <h4 class="title">{{ data.title }}</h4>
   </div>
   <div mat-dialog-content class="delete-modal__content">
-    Would you like to edit product
+    Bạn muốn sửa sản phẩm
     <span class="name">{{ data.name }} </span>?
   </div>
   <div mat-dialog-actions class="delete-modal__action">
     <button mat-button (click)="onNoClick()" class="btn-action btn-cancel">
-      Cancel
+      Hủy
     </button>
     <button
       mat-button
@@ -17,7 +17,7 @@
       (click)="onClick()"
       class="btn-action btn-edit"
     >
-      Edit
+      Sửa
     </button>
   </div>
 </div>

@@ -219,7 +219,7 @@ export class ProductEditComponent implements OnInit {
   // get subcategory
 
   getSubCategory(id: string) {
-    this.productService.getSubCategoriesByCT(id).subscribe((response) => {
+    this.productService.getSubCategoriesByCT(id).then((response: any) => {
       this.subCategories = response.data
       this.arraySubcategory.push(this.subCategories)
       let subCategoryArr = this.formDataProduct.get('subCategory') as FormArray
