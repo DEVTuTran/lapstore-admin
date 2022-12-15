@@ -3,16 +3,16 @@
     <div class="toolbar-link">
         <img class="icon-image link-item" [src]="homeIcon" alt="home" routerLink="/dashboard" />
         <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
-        <span class="link-item" routerLink="/orders">Orders</span>
+        <span class="link-item" routerLink="/orders">Đơn hàng</span>
         <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
-        <span>Edit</span>
+        <span>Sửa</span>
         <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
         <span>{{ orderInfor && orderInfor._id }}</span>
     </div>
 </mat-toolbar>
 <mat-card-content class="order-edit">
 <div class="order-content">
-    <p class="label">Product Infor</p>
+    <p class="label">Thông tin sản phẩm</p>
     <div class="product-detail">
        <div>
         <div *ngFor="let product of orderInfor?.products">
@@ -42,7 +42,7 @@
         </p>
         <img [src]="editIcon" /></div>
     </div>
-    <p class="label">Shipping Address</p>
+    <p class="label">Địa chỉ giao hàng</p>
     <div class="shipping-detail">
         <p class="shipping-infor">{{orderInfor?.shipping.shipping.shipping_name}}</p>
         <p class="shipping-infor">{{orderInfor?.shipping.shipping.shipping_phone}}</p>

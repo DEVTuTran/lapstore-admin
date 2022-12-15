@@ -342,7 +342,7 @@ export class ProductCreateComponent implements OnInit {
             })
           },
           (error) => {
-            this.snackBar.open('Create product not success', '', {
+            this.snackBar.open('Thêm sản phẩm không thành công', '', {
               duration: 3000,
               panelClass: 'snackbar-notification__not-success',
             })
@@ -382,14 +382,14 @@ export class ProductCreateComponent implements OnInit {
     if (this.formDataProduct.valid) {
       this.productService.createProduct(data).subscribe(
         (data) => {
-          this.snackBar.open('Create product success', '', {
+          this.snackBar.open('Thêm sản phẩm thành công', '', {
             duration: 3000,
             panelClass: 'snackbar-notification__success',
           })
           this.router.navigate([routes.VIEW_PRODUCT])
         },
         (error) => {
-          this.snackBar.open('Create product not success', '', {
+          this.snackBar.open('Thêm sản phẩm không thành công', '', {
             duration: 3000,
             panelClass: 'snackbar-notification__not-success',
           })

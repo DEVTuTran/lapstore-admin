@@ -416,7 +416,7 @@ export class ProductEditComponent implements OnInit {
 
     const dialogRef = this.dialog.open(EditModalComponent, {
       data: {
-        title: 'Edit product?',
+        title: 'Cập nhật sản phẩm?',
         name: name,
         isEdit: this.isEdit,
       },
@@ -454,14 +454,14 @@ export class ProductEditComponent implements OnInit {
 
     this.productService.editProduct(this.productId, data).subscribe(
       (response) => {
-        this.snackBar.open('Edit product success', '', {
+        this.snackBar.open('Cập nhật thông tin sản phẩm thành công', '', {
           duration: 3000,
           panelClass: 'snackbar-notification__success',
         })
         this.router.navigate([routes.DETAIL_PRODUCT + this.productId])
       },
       (error) => {
-        this.snackBar.open('Edit product not success', '', {
+        this.snackBar.open('Cập nhật sản phẩm không thành công', '', {
           duration: 3000,
           panelClass: 'snackbar-notification__not-success',
         })

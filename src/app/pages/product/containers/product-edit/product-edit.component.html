@@ -8,9 +8,9 @@
       routerLink="/dashboard"
     />
     <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
-    <span class="link-item" routerLink="/products">Products</span>
+    <span class="link-item" routerLink="/products">Sản phẩm</span>
     <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
-    <span>Edit</span>
+    <span>Sửa</span>
     <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
     <span>{{ productInfor && productInfor.productName }}</span>
   </div>
@@ -47,27 +47,27 @@
                 <mat-form-field appearance="outline" class="field-input">
                   <input
                     matInput
-                    placeholder="Product name"
+                    placeholder="Tên sản phẩm"
                     type="text"
                     formControlName="productName"
                   />
                   <mat-error
                     *ngIf="!formDataProduct.get('productName')?.errors?.['required']"
                   >
-                    Product name must be longer than 10 characters!
+                    Tên sản phẩm phải dài hơn 10 ký tự!
                   </mat-error>
                   <mat-error
                     *ngIf="formDataProduct.get('productName')?.invalid && (formDataProduct.get('productName')?.dirty || formDataProduct.get('productName')?.touched) && formDataProduct.get('productName')?.errors?.['required']"
                   >
-                    Product name is required
+                    Tên sản phẩm là bắt buộc
                   </mat-error>
                 </mat-form-field>
               </div>
               <div class="row-item__field">
-                <p class="label">Brand</p>
+                <p class="label">Thương hiệu</p>
                 <mat-form-field appearance="outline" class="field-input">
                   <mat-select
-                    placeholder="Brand"
+                    placeholder="Thương hiệu"
                     formControlName="brand"
                     (selectionChange)="selectBrands($event)"
                   >
@@ -103,7 +103,7 @@
                 </mat-form-field>
               </div>
               <div class="row-item__field feild-info">
-                <p class="label">Screen size</p>
+                <p class="label">Kích thước màn hình</p>
                 <mat-form-field appearance="outline" class="field-input">
                   <mat-select placeholder="Screen" formControlName="screen" (selectionChange)="selectScreen($event)">
                     <mat-option *ngFor="let screen of screens" [value]="screen">
@@ -124,7 +124,7 @@
                   *ngFor="let formGroup of formCategory.controls; let i = index"
                 >
                   <div [formGroupName]="i" *ngIf="i != 0">
-                    <p class="label">Category {{ i }}</p>
+                    <p class="label">Danh mục {{ i }}</p>
                     <mat-form-field appearance="outline" class="field-input">
                       <mat-select
                         placeholder="Category"
@@ -154,7 +154,7 @@
                   "
                 >
                   <div [formGroupName]="i" *ngIf="i != 0">
-                    <p class="label">Sub Category {{ i }}</p>
+                    <p class="label">Danh mục con {{ i }}</p>
                     <mat-form-field appearance="outline" class="field-input">
                       <mat-select
                         placeholder="Sub Category"
@@ -176,7 +176,7 @@
               <div class="row-item__field-number">
                 <div class="field-input">
                   <div class="field-input__item-price">
-                    <p class="label">Price (VND)</p>
+                    <p class="label">Giá (VND)</p>
 
                     <mat-form-field
                       appearance="outline"
@@ -209,17 +209,17 @@
                       <mat-error
                         *ngIf="!formDataProduct.get('price')?.errors?.['required']"
                       >
-                        Price must be greater than 1.000.000đ!
+                        Giá sản phẩm phải lớn hơn 1.000.000đ!
                       </mat-error>
                       <mat-error
                         *ngIf="formDataProduct.get('price')?.invalid && (formDataProduct.get('price')?.dirty || formDataProduct.get('price')?.touched) && formDataProduct.get('price')?.errors?.['required']"
                       >
-                        Price is required
+                        Giá là bắt buộc
                       </mat-error>
                     </mat-form-field>
                   </div>
                   <div class="field-input__item">
-                    <p class="label">Discount (%)</p>
+                    <p class="label">Giảm giá (%)</p>
 
                     <mat-form-field
                       appearance="outline"
@@ -251,7 +251,7 @@
                       <mat-error
                         *ngIf="!formDataProduct.get('discount')?.errors?.['required']"
                       >
-                        Discount must be greater or equal to 0!
+                        Giá phải lớn hơn hoặc bằng 0!
                       </mat-error>
                       <mat-error
                         *ngIf="formDataProduct.get('discount')?.invalid && (formDataProduct.get('discount')?.dirty || formDataProduct.get('discount')?.touched) && formDataProduct.get('discount')?.errors?.['required']"
@@ -261,23 +261,23 @@
                     </mat-form-field>
                   </div>
                   <div class="field-input__item status">
-                    <p class="label">status</p>
+                    <p class="label">Trạng thái</p>
 
                     <div class="stock">
                       <div
                         *ngIf="productInfor.status == 1; else status"
                         class="in-stock"
                       >
-                        In stock
+                        Trong kho
                       </div>
                       <ng-template #status>
-                        <div class="out-of-stock">Out of stock</div>
+                        <div class="out-of-stock">Chưa có trong kho</div>
                       </ng-template>
                       <span
                         *ngIf="productInfor.status == 0"
                         class="add-to-inventory"
                         (click)="openDialogAdd(productInfor.productName)"
-                        >Add to inventory</span
+                        >Thêm vào kho</span
                       >
                     </div>
                   </div>
@@ -286,7 +286,7 @@
             </div>
             <div class="row-item">
               <div class="row-item__field-full">
-                <p class="label">Description</p>
+                <p class="label">Mô tả</p>
                 <mat-form-field appearance="outline" class="field-input">
                   <textarea
                     matInput
@@ -296,12 +296,12 @@
                   <mat-error
                     *ngIf="!formDataProduct.get('description')?.errors?.['required']"
                   >
-                    Description must be longer than 10 characters!
+                    Mô tả sản phẩm phải dài hơn 10 ký tự!
                   </mat-error>
                   <mat-error
                     *ngIf="formDataProduct.get('description')?.invalid && (formDataProduct.get('description')?.dirty || formDataProduct.get('description')?.touched) && formDataProduct.get('description')?.errors?.['required']"
                   >
-                    Description is required
+                    Mô tả là bắt buộc
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -359,7 +359,7 @@
       class="btn-action btn-save"
       (click)="openDialog(productInfor.productName)"
     >
-      Edit
+      Sửa
     </button>
     <button
       mat-stroked-button
@@ -368,7 +368,7 @@
       type="button"
       (click)="onGoBack()"
     >
-      Go Back
+      Trở lại
     </button>
   </div>
 </mat-card-content>
