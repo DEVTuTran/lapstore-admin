@@ -8,7 +8,7 @@
     *ngIf="data.type == 'add'; else edit"
   >
     {{ data.message }}
-    <span class="name">{{ data.name }} </span>to inventory?
+    <span class="name">{{ data.name }} </span>vào kho?
   </div>
   <ng-template #edit>
     <div mat-dialog-content class="delete-modal__content">
@@ -20,23 +20,23 @@
     <mat-form-field appearance="outline" class="field-quantity">
       <input
         matInput
-        placeholder="Enter quantity"
+        placeholder="Nhập vào số lượng"
         type="number"
         formControlName="quantity"
       />
       <mat-error *ngIf="!quantityForm.get('quantity')?.errors?.['required']">
-        Quantity must be greater than 1!
+        Số lượng phải lớn hơn 1 1!
       </mat-error>
       <mat-error
         *ngIf="quantityForm.get('quantity')?.invalid && (quantityForm.get('quantity')?.dirty || quantityForm.get('quantity')?.touched) && quantityForm.get('quantity')?.errors?.['required']"
       >
-        Quantity is required
+        Số lượng là bắt buộc
       </mat-error>
     </mat-form-field>
   </form>
   <div mat-dialog-actions class="delete-modal__action">
     <button mat-button (click)="onNoClick()" class="btn-action btn-cancel">
-      Cancel
+      Hủy
     </button>
     <button
       mat-button
@@ -45,7 +45,7 @@
       (click)="onClick()"
       class="btn-action btn-edit"
     >
-      {{ data.type == "add" ? "Add" : "Edit" }}
+      {{ data.type == "add" ? "Thêm" : "Sửa" }}
     </button>
   </div>
 </div>

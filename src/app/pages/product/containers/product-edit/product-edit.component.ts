@@ -371,8 +371,8 @@ export class ProductEditComponent implements OnInit {
   openDialogAdd(name: string | null) {
     const dialogRef = this.dialog.open(AddInventoryComponent, {
       data: {
-        title: 'Add product to inventory?',
-        message: 'Would you like to add product',
+        title: 'Thêm sản phẩm vào kho?',
+        message: 'Bạn muốn thêm sản phẩm',
         name: name,
         isAdd: this.isAdd,
         type: 'add',
@@ -394,14 +394,14 @@ export class ProductEditComponent implements OnInit {
     }
     this.productService.addToInventory(value).subscribe(
       (response) => {
-        this.snackBar.open('Add product to inventory success', '', {
+        this.snackBar.open('Thêm sản phẩm vào kho thành công', '', {
           duration: 3000,
           panelClass: 'snackbar-notification__success',
         })
         this.router.navigate([routes.INVENTORY])
       },
       (error) => {
-        this.snackBar.open('Add product to inventory not success', '', {
+        this.snackBar.open('Thêm sản phẩm vào kho không thành công', '', {
           duration: 3000,
           panelClass: 'snackbar-notification__not-success',
         })
