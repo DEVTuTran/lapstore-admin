@@ -22,16 +22,19 @@ import {
   ProductDetailComponent,
 } from './pages/product/containers/index'
 import { SettingComponent } from './pages/setting/containers'
+import { LoginGuard } from './services/guards/login.guard'
 
 const routes: Routes = [
   {
     path: 'dashboard',
     pathMatch: 'full',
     component: DashboardPageComponent,
+    canActivate: [LoginGuard],
   },
   {
     path: 'customers',
     component: CustomerComponent,
+    canActivate: [LoginGuard],
     children: [
       { path: '', pathMatch: 'full', component: CustomerListComponent },
       { path: 'view', component: CustomerListComponent },
@@ -41,6 +44,7 @@ const routes: Routes = [
   {
     path: 'orders',
     component: OrderComponent,
+    canActivate: [LoginGuard],
     children: [
       { path: '', pathMatch: 'full', component: OrderViewComponent },
       { path: 'view', component: OrderViewComponent },
@@ -50,6 +54,7 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductComponent,
+    canActivate: [LoginGuard],
     children: [
       { path: '', pathMatch: 'full', component: ProductViewComponent },
       { path: 'view', component: ProductViewComponent },
@@ -61,6 +66,7 @@ const routes: Routes = [
   {
     path: 'inventory',
     component: InventoryPageComponent,
+    canActivate: [LoginGuard],
     children: [
       { path: '', pathMatch: 'full', component: InventoryListComponent },
       { path: 'view', component: InventoryListComponent },
@@ -71,6 +77,7 @@ const routes: Routes = [
     path: 'settings',
     pathMatch: 'full',
     component: SettingComponent,
+    canActivate: [LoginGuard],
   },
   {
     path: '404',
