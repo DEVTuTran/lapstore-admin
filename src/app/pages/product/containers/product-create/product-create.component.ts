@@ -182,6 +182,7 @@ export class ProductCreateComponent implements OnInit {
     this.initFormValue()
 
     const arr = this.formDataProduct.get('specs') as FormArray
+
     this.detailsProduct.slice(0, 7).forEach((i) => {
       arr.push(this.fbd.group(i))
     })

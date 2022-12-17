@@ -156,7 +156,7 @@ export class ProductEditComponent implements OnInit {
     this.hideButton = !this.hideButton
     const arr = this.formDataProduct.get('specs') as FormArray
     this.productInfor?.specs
-      .slice(8, this.productInfor?.specs.length)
+      .slice(9, this.productInfor?.specs.length)
       .forEach((i) => {
         arr.push(this.fbd.group(i))
       })
@@ -182,9 +182,11 @@ export class ProductEditComponent implements OnInit {
       this.initFormValue()
 
       const arr = this.formDataProduct.get('specs') as FormArray
-      this.productInfor?.specs.slice(1, 7).forEach((i) => {
+
+      this.productInfor?.specs.slice(1, 8).forEach((i) => {
         arr.push(this.fbd.group(i))
       })
+      console.log(arr)
     })
   }
 

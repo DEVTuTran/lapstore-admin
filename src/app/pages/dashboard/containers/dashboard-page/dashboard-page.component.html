@@ -41,11 +41,13 @@
       </div>
       <div class="announcements">
         <h2 class="title">Thông báo</h2>
+       <div class="notification-list">
         <div *ngFor="let item of dashboardInfo?.notification">
           <div class="notification-item">
             <p>{{item.message}} <span (click)="editOrder(item.idToReview)" class="link">{{item.idToReview}}</span></p>
           </div>
         </div>
+       </div>
       </div>
     </div>
   </mat-card-content>
