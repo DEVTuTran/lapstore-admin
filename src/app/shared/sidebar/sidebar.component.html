@@ -32,7 +32,7 @@
         <mat-card-header>
           <img
             mat-card-avatar
-            *ngIf="user?.profile?.photo && !isLoading; else elsephoto"
+            *ngIf="user?.profile?.photo; else elsephoto"
             [src]="user.profile?.photo"
             alt="avatar"
           />
@@ -41,13 +41,13 @@
           </ng-template>
           <mat-card-title
             class="user-name"
-            *ngIf="user?.username && !isLoading; else elseUsername"
+            *ngIf="user?.username; else elseUsername"
             >{{ user.username }}</mat-card-title
           >
           <ng-template #elseUsername>
-            <mat-card-title class="user-name">username</mat-card-title>
+            <mat-card-title class="user-name">Tên người dùng</mat-card-title>
           </ng-template>
-          <mat-card-subtitle class="user-role">Admin</mat-card-subtitle>
+          <mat-card-subtitle class="user-role">Quản trị viên</mat-card-subtitle>
           <button mat-icon-button (click)="onSignOut()" class="signout-btn">
             <mat-icon class="logout-icon">logout</mat-icon>
           </button>

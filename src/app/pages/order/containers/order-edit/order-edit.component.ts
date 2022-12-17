@@ -55,8 +55,8 @@ export class OrderEditComponent implements OnInit {
   openDialogEdit(id: string, status: any): void {
     const dialogRef = this.dialog.open(EditOrderComponent, {
       data: {
-        title: 'Change order status',
-        message: 'Would you like to Change order status ',
+        title: 'Cập nhật trạng thái đơn hàng',
+        message: 'Bạn muốn cập nhật trạng thái đơn hàng ',
         type: 'edit',
         status: status,
         isEdit: this.isEdit,
@@ -77,14 +77,14 @@ export class OrderEditComponent implements OnInit {
         this.isLoading = false
         this.getOrderDetail(this.orderId)
 
-        this.snackBar.open('Change status success', '', {
+        this.snackBar.open('Cập nhật trạng thái đơn hàng thành công', '', {
           duration: 3000,
           panelClass: 'snackbar-notification__success',
         })
       },
       (error) => {
         this.isLoading = false
-        this.snackBar.open('Change status not success', '', {
+        this.snackBar.open('Cập nhật trạng thái đơn hàng không thành công', '', {
           duration: 3000,
           panelClass: 'snackbar-notification__not-success',
         })

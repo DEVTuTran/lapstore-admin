@@ -8,7 +8,7 @@
       routerLink="/dashboard"
     />
     <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
-    <span class="link-item" routerLink="/customers">Customers</span>
+    <span class="link-item" routerLink="/customers">Người dùng</span>
     <img class="icon-image slash-icon" [src]="slashIcon" alt="home" />
     <span>{{ userInfor && userInfor.userName }}</span>
   </div>
@@ -16,7 +16,7 @@
 <mat-card-content class="setting-content">
   <mat-card class="setting-content__wrapper">
     <mat-card-title class="setting-content__wrapper-title">
-      <p class="title">User Detail</p>
+      <p class="title">Thông tin người dùng</p>
     </mat-card-title>
     <div class="setting-content__wrapper-content">
       <div class="upload-image">
@@ -35,11 +35,11 @@
       >
         <div class="row-item">
           <div class="row-item__field">
-            <p class="label">Username</p>
+            <p class="label">Tên người dùng</p>
             <mat-form-field appearance="outline" class="field-input">
               <input
                 matInput
-                placeholder="Username"
+                placeholder="Tên người dùng"
                 type="text"
                 formControlName="userName"
               />
@@ -59,12 +59,12 @@
         </div>
         <div class="row-item">
           <div class="row-item__field">
-            <p class="label">Date Of Birth</p>
+            <p class="label">Ngày sinh</p>
             <mat-form-field appearance="outline" class="field-input">
               <input
                 matInput
                 [matDatepicker]="picker"
-                placeholder="Date Of Birth"
+                placeholder="Ngày sinh"
                 formControlName="dateOfBirth"
               />
               <mat-datepicker-toggle
@@ -75,14 +75,14 @@
             </mat-form-field>
           </div>
           <div class="row-item__field">
-            <p class="label">Phone Number</p>
+            <p class="label">Số điện thoại</p>
             <mat-form-field
               appearance="outline"
               class="field-input select-field"
             >
               <input
                 matInput
-                placeholder="Phone number"
+                placeholder="Số điện thoại"
                 type="text"
                 formControlName="phoneNumber"
               />
@@ -91,7 +91,7 @@
         </div>
         <div class="row-item">
           <div class="row-item__field-address">
-            <p class="label">Location</p>
+            <p class="label">Địa chỉ</p>
             <div class="field-input">
               <mat-form-field appearance="outline" class="row-item__field-sub">
                 <mat-select
@@ -137,11 +137,11 @@
         </div>
         <div class="row-item">
           <div class="row-item__field-full">
-            <p class="label">Address</p>
+            <p class="label">Số nhà, đường...</p>
             <mat-form-field appearance="outline" class="field-input">
               <input
                 matInput
-                placeholder="Address"
+                placeholder="Số nhà, đường..."
                 type="text"
                 formControlName="address"
               />
@@ -158,7 +158,7 @@
       class="btn-action btn-save"
       (click)="onEdit()"
     >
-      Save
+      Lưu
     </button>
     <button
       mat-stroked-button
@@ -166,7 +166,7 @@
       type="reset"
       class="btn-action btn-cancel"
     >
-      Cancel
+      Hủy
     </button>
   </div>
 </mat-card-content>

@@ -34,6 +34,7 @@ export class AuthComponent {
           this.userId = id
           this.service.authStatusListener.next(true)
           this.service.saveAuthData(token, id)
+          this.service.setUserInfo(response.data.user)
           this.router.navigate([this.routers.DASHBOARD])
         }
         if (role != 'Admin') {

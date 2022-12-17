@@ -47,7 +47,7 @@ export class EditOrderComponent implements OnInit {
   onClick() {
     this.data.isEdit = true
     const newData = {
-      status: this.data.status,
+      status: this.order.value.status,
     }
     this.dialogRef.close({ newData, isEdit: this.data.isEdit })
   }
